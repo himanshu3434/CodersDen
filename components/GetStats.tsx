@@ -2,10 +2,10 @@
 import React, { useState } from "react";
 
 import RatingTable from "./RatingTable";
-import { tableDataObjType } from "@/types/types";
 import { RatingChange } from "@/actions/charts/ratingChange";
 import Button from "./Button";
-
+import { tableDataObjType } from "@/types/types";
+import MinMaxTable from "./MinMaxTable";
 function GetStats() {
   const [user1, setUser1] = useState("");
   const [user2, setUser2] = useState("");
@@ -21,6 +21,7 @@ function GetStats() {
       setError(true);
     }
   };
+
   return (
     <div>
       <div className="  shadow-lg mx-auto flex flex-col items-center w-[30rem]  p-5 my-7">
@@ -57,6 +58,15 @@ function GetStats() {
           user1={data.user1}
           user2={data.user2}
           commonContests={data.commonContests}
+          allRatings={data.allRatings}
+        />
+      )}
+
+      {data && (
+        <MinMaxTable
+          user1={data.user1}
+          user2={data.user2}
+          allRatings={data.allRatings}
         />
       )}
     </div>
