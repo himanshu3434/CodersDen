@@ -4,20 +4,27 @@ import React, { useState } from "react";
 import RatingTable from "./RatingTable";
 import { RatingChange } from "@/actions/charts/ratingChange";
 import Button from "./Button";
-import { tableDataObjType } from "@/types/types";
+import { questionSolvedTableObjType, tableDataObjType } from "@/types/types";
 import MinMaxTable from "./MinMaxTable";
+import { QuestionSolved } from "@/actions/charts/questionSolved";
+import QuestionsSolvedTable from "./QuestionsSolvedTable";
 function GetStats() {
   const [user1, setUser1] = useState("");
   const [user2, setUser2] = useState("");
   const [error, setError] = useState(false);
   const [data, setData] = useState<tableDataObjType>();
+  const [questionSolvedTableData, setQuestionSolvedTableObjData] =
+    useState<questionSolvedTableObjType>();
   const handlerClick = async () => {
     setError(false);
     setData(undefined);
     const alldata = await RatingChange(user1, user2);
+    const questionSolvedTableObj = await QuestionSolved(user1, user2);
 
-    if (alldata.valid) setData(alldata);
-    else {
+    if (alldata.valid) {
+      setData(alldata);
+      setQuestionSolvedTableObjData(questionSolvedTableObj);
+    } else {
       setError(true);
     }
   };
@@ -67,6 +74,13 @@ function GetStats() {
           user1={data.user1}
           user2={data.user2}
           allRatings={data.allRatings}
+        />
+      )}
+      {questionSolvedTableData && (
+        <QuestionsSolvedTable
+          user1={questionSolvedTableData.user1}
+          user2={questionSolvedTableData.user2}
+          allSolvedQuestions={questionSolvedTableData.allSolvedQuestions}
         />
       )}
     </div>

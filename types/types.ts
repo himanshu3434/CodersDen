@@ -30,3 +30,17 @@ export type minMaxTablePropsType = {
   user2: string;
   allRatings: minMaxtype;
 };
+export type allQuestionsSolvedType = {
+  easySolvedUser1: number;
+  easySolvedUser2: number;
+  mediumSolvedUser1: number;
+  mediumSolvedUser2: number;
+  hardSolvedUser1: number;
+  hardSolvedUser2: number;
+};
+
+export type questionSolvedTableObjType = {
+  user1: string;
+  user2: string;
+  allSolvedQuestions: allQuestionsSolvedType;
+};
