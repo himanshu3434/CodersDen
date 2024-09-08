@@ -17,8 +17,17 @@ export default function MinMaxTable({
     <BarChart
       xAxis={[{ scaleType: "band", data: ["Min ", "Curr ", "Max "] }]}
       series={[
-        { data: [minRatingUser1, currentRatingUser1, maxRatingUser1] },
-        { data: [minRatingUser2, currentRatingUser2, maxRatingUser2] },
+        {
+          id: user1,
+          label: user1,
+          data: [minRatingUser1, currentRatingUser1, maxRatingUser1],
+        },
+        {
+          id: user2,
+          label: user2,
+
+          data: [minRatingUser2, currentRatingUser2, maxRatingUser2],
+        },
       ]}
       width={500}
       height={300}
