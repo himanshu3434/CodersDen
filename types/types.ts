@@ -17,12 +17,18 @@ export type minMaxtype = {
   currentRatingUser1: number;
   currentRatingUser2: number;
 };
+export type contestType = {
+  timestamp: number;
+  rating: number;
+};
 export type tableDataObjType = {
   valid: boolean;
   user1: string;
   user2: string;
   commonContests: ratingChangeType[];
   allRatings: minMaxtype;
+  allContestsUser1: contestType[];
+  allContestsUser2: contestType[];
 };
 
 export type minMaxTablePropsType = {
@@ -43,4 +49,10 @@ export type questionSolvedTableObjType = {
   user1: string;
   user2: string;
   allSolvedQuestions: allQuestionsSolvedType;
+};
+export type ContestTimeLinePropsType = {
+  user1: string;
+  user2: string;
+  allContestsUser1: contestType[];
+  allContestsUser2: contestType[];
 };

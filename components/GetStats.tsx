@@ -8,6 +8,7 @@ import { questionSolvedTableObjType, tableDataObjType } from "@/types/types";
 import MinMaxTable from "./MinMaxTable";
 import { QuestionSolved } from "@/actions/charts/questionSolved";
 import QuestionsSolvedTable from "./QuestionsSolvedTable";
+import ContestTimeLine from "./ContestTimeLine";
 function GetStats() {
   const [user1, setUser1] = useState("");
   const [user2, setUser2] = useState("");
@@ -66,6 +67,8 @@ function GetStats() {
           user2={data.user2}
           commonContests={data.commonContests}
           allRatings={data.allRatings}
+          allContestsUser1={data.allContestsUser1}
+          allContestsUser2={data.allContestsUser2}
         />
       )}
 
@@ -81,6 +84,15 @@ function GetStats() {
           user1={questionSolvedTableData.user1}
           user2={questionSolvedTableData.user2}
           allSolvedQuestions={questionSolvedTableData.allSolvedQuestions}
+        />
+      )}
+
+      {data && (
+        <ContestTimeLine
+          user1={data.user1}
+          user2={data.user2}
+          allContestsUser1={data.allContestsUser1}
+          allContestsUser2={data.allContestsUser2}
         />
       )}
     </div>

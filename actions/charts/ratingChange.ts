@@ -26,6 +26,8 @@ export const RatingChange = async (
         currentRatingUser1: 0,
         currentRatingUser2: 0,
       },
+      allContestsUser1: [],
+      allContestsUser2: [],
     };
 
     if (
@@ -92,7 +94,28 @@ export const RatingChange = async (
     tableDataObj.allRatings.currentRatingUser1 = currentRatingUser1;
     tableDataObj.allRatings.currentRatingUser2 = currentRatingUser2;
 
-    console.log("table data ", tableDataObj);
+    const allContestsUser1 = user1Data.data.contestParticipation.map(
+      (contest: any) => {
+        return {
+          timestamp: contest.contest.startTime,
+          rating: Math.round(contest.rating),
+        };
+      }
+    );
+
+    const allContestsUser2 = user2Data.data.contestParticipation.map(
+      (contest: any) => {
+        return {
+          timestamp: contest.contest.startTime,
+          rating: Math.round(contest.rating),
+        };
+      }
+    );
+
+    tableDataObj.allContestsUser1 = allContestsUser1;
+    tableDataObj.allContestsUser2 = allContestsUser2;
+
+    // console.log("table data ", tableDataObj);
     return tableDataObj;
   } catch (err) {
     console.log(err);
