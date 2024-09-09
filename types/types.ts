@@ -67,3 +67,14 @@ export type MaxSubmissionDataObjType = {
   user1MaxSubmissionsMonth: number;
   user2MaxSubmissionsMonth: number;
 };
+export type AllSubmissionDataType = {
+  maxSubmissionDataObjType: MaxSubmissionDataObjType;
+  streakUser1: number;
+  streakUser2: number;
+  totalActiveDaysUser1: number;
+  totalActiveDaysUser2: number;
+  totalSubmissionsUser1: number;
+  totalSubmissionsUser2: number;
+  availableYearsUser1: number[];
+  availableYearsUser2: number[];
+};

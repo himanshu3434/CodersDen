@@ -3,11 +3,11 @@ import { BarChart } from "@mui/x-charts";
 import React from "react";
 
 function MaxSubmissionTable({
-  allSubmissionDetails,
+  maxSubmissionDataObj,
   user1,
   user2,
 }: {
-  allSubmissionDetails: MaxSubmissionDataObjType;
+  maxSubmissionDataObj: MaxSubmissionDataObjType;
   user1: string;
   user2: string;
 }) {
@@ -20,9 +20,9 @@ function MaxSubmissionTable({
             id: user1,
             label: user1,
             data: [
-              allSubmissionDetails.user1MaxSubmissionsDay,
-              allSubmissionDetails.user1MaxSubmissionsWeek,
-              allSubmissionDetails.user1MaxSubmissionsMonth,
+              maxSubmissionDataObj.user1MaxSubmissionsDay,
+              maxSubmissionDataObj.user1MaxSubmissionsWeek,
+              maxSubmissionDataObj.user1MaxSubmissionsMonth,
             ],
           },
           {
@@ -30,13 +30,13 @@ function MaxSubmissionTable({
             label: user2,
 
             data: [
-              allSubmissionDetails.user2MaxSubmissionsDay,
-              allSubmissionDetails.user2MaxSubmissionsWeek,
-              allSubmissionDetails.user2MaxSubmissionsMonth,
+              maxSubmissionDataObj.user2MaxSubmissionsDay,
+              maxSubmissionDataObj.user2MaxSubmissionsWeek,
+              maxSubmissionDataObj.user2MaxSubmissionsMonth,
             ],
           },
         ]}
-        width={500}
+        width={400}
         height={300}
       />
     </div>

@@ -1,5 +1,9 @@
 "use server";
-import { MaxSubmissionDataObjType, SubmissionsDataType } from "@/types/types";
+import {
+  AllSubmissionDataType,
+  MaxSubmissionDataObjType,
+  SubmissionsDataType,
+} from "@/types/types";
 import axios from "axios";
 
 const getDayOfTheYear = (unixDate: number) => {
@@ -95,5 +99,28 @@ export const SubmissionsDetails = async (
   maxSubmissionsDataObj.user2MaxSubmissionsMonth =
     getMonthSubmissions(user2Submissions);
 
-  return maxSubmissionsDataObj;
+  const allSubmissionsData: AllSubmissionDataType = {
+    maxSubmissionDataObjType: maxSubmissionsDataObj,
+    streakUser1: user1Data.data.data.matchedUser.userCalendar.streak,
+    streakUser2: user2Data.data.data.matchedUser.userCalendar.streak,
+    totalActiveDaysUser1:
+      user1Data.data.data.matchedUser.userCalendar.totalActiveDays,
+    totalActiveDaysUser2:
+      user2Data.data.data.matchedUser.userCalendar.totalActiveDays,
+    totalSubmissionsUser1: 0,
+    totalSubmissionsUser2: 0,
+    availableYearsUser1:
+      user1Data.data.data.matchedUser.userCalendar.activeYears,
+    availableYearsUser2:
+      user2Data.data.data.matchedUser.userCalendar.activeYears,
+  };
+
+  allSubmissionsData.totalSubmissionsUser1 = user1Submissions
+    .map((sub) => sub[1])
+    .reduce((acc, curr) => acc + curr, 0);
+  allSubmissionsData.totalSubmissionsUser2 = user2Submissions
+    .map((sub) => sub[1])
+    .reduce((acc, curr) => acc + curr, 0);
+
+  return allSubmissionsData;
 };
