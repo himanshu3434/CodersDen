@@ -56,3 +56,14 @@ export type ContestTimeLinePropsType = {
   allContestsUser1: contestType[];
   allContestsUser2: contestType[];
 };
+
+export type SubmissionsDataType = [string, number][];
+
+export type MaxSubmissionDataObjType = {
+  user1MaxSubmissionsDay: number;
+  user2MaxSubmissionsDay: number;
+  user1MaxSubmissionsWeek: number;
+  user2MaxSubmissionsWeek: number;
+  user1MaxSubmissionsMonth: number;
+  user2MaxSubmissionsMonth: number;
+};

@@ -9,10 +9,12 @@ import MinMaxTable from "./MinMaxTable";
 import { QuestionSolved } from "@/actions/charts/questionSolved";
 import QuestionsSolvedTable from "./QuestionsSolvedTable";
 import ContestTimeLine from "./ContestTimeLine";
+import Submissions from "./Submissions";
 function GetStats() {
   const [user1, setUser1] = useState("");
   const [user2, setUser2] = useState("");
   const [error, setError] = useState(false);
+   
   const [data, setData] = useState<tableDataObjType>();
   const [questionSolvedTableData, setQuestionSolvedTableObjData] =
     useState<questionSolvedTableObjType>();
@@ -95,6 +97,7 @@ function GetStats() {
           allContestsUser2={data.allContestsUser2}
         />
       )}
+      {data&& <Submissions user1={user1} user2={user2}/>}
     </div>
   );
 }
