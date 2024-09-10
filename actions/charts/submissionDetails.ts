@@ -89,10 +89,12 @@ export const SubmissionsDetails = async (
     .map((sub) => sub[1])
     .reduce((acc, curr) => Math.max(acc, curr), 0);
 
-  maxSubmissionsDataObj.user1MaxSubmissionsWeek =
-    getWeekSubmissions(user1Submissions);
-  maxSubmissionsDataObj.user2MaxSubmissionsWeek =
-    getWeekSubmissions(user2Submissions);
+  if (user1Submissions.length !== 0)
+    maxSubmissionsDataObj.user1MaxSubmissionsWeek =
+      getWeekSubmissions(user1Submissions);
+  if (user2Submissions.length !== 0)
+    maxSubmissionsDataObj.user2MaxSubmissionsWeek =
+      getWeekSubmissions(user2Submissions);
 
   maxSubmissionsDataObj.user1MaxSubmissionsMonth =
     getMonthSubmissions(user1Submissions);

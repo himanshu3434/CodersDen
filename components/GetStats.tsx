@@ -14,7 +14,7 @@ function GetStats() {
   const [user1, setUser1] = useState("");
   const [user2, setUser2] = useState("");
   const [error, setError] = useState(false);
-   
+
   const [data, setData] = useState<tableDataObjType>();
   const [questionSolvedTableData, setQuestionSolvedTableObjData] =
     useState<questionSolvedTableObjType>();
@@ -33,7 +33,7 @@ function GetStats() {
   };
 
   return (
-    <div>
+    <div className="flex flex-col justify-center items-center">
       <div className="  shadow-lg mx-auto flex flex-col items-center w-[30rem]  p-5 my-7">
         <div className="my-3 flex ">
           <input
@@ -97,7 +97,7 @@ function GetStats() {
           allContestsUser2={data.allContestsUser2}
         />
       )}
-      {data&& <Submissions user1={user1} user2={user2}/>}
+      {data && <Submissions user1={user1} user2={user2} />}
     </div>
   );
 }
