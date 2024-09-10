@@ -1,0 +1,21 @@
+version: "3.8"
+services:
+  app:
+    build: .
+    container_name: codersden-docker
+    ports:
+      - "3000:3000"
+    restart: always
+    volumes:
+      - .:/app
+      - .:/component
+      - .:/types
+      - .:/actions
+    environment:
+      - Leetcode_Data_URL=http://leetcode-api:3002
+
+  api:
+    image: leetcode-api
+    container_name: leetcode-api
+    ports:
+      - "3002:3002"
