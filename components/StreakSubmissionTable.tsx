@@ -22,7 +22,6 @@ function StreakSubmissionTable({
         ]}
         series={[
           {
-            id: user1,
             label: user1,
             data: [
               allSubmissionDetails.streakUser1,
@@ -31,7 +30,6 @@ function StreakSubmissionTable({
             ],
           },
           {
-            id: user2,
             label: user2,
 
             data: [

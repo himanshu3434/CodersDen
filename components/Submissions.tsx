@@ -22,7 +22,7 @@ function Submissions({ user1, user2 }: { user1: string; user2: string }) {
           allSubmissionDetails.availableYearsUser2
         )
       );
-      console.log("this is all the data ", allSubmissionDetails);
+      // console.log("this is all the data ", allSubmissionDetails);
     };
 
     getSubmissions();

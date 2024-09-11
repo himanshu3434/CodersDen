@@ -45,7 +45,7 @@ export default function ContestTimeLine({
 }: ContestTimeLinePropsType) {
   //   console.log("e1e");
   const xAxisData = mergeTimestamps(allContestsUser1, allContestsUser2);
-  console.log(xAxisData.length);
+  // console.log(xAxisData.length);
   const sortedContestsUser1 = allContestsUser1.sort(
     (a, b) => a.timestamp - b.timestamp
   );
@@ -79,7 +79,7 @@ export default function ContestTimeLine({
 
   const user1Rating = mapRatings(sortedContestsUser1, xAxisData);
   const user2Rating = mapRatings(sortedContestsUser2, xAxisData);
-  console.log(user1Rating);
+  // console.log(user1Rating);
   return (
     <LineChart
       xAxis={[
@@ -99,16 +99,16 @@ export default function ContestTimeLine({
       ]}
       series={[
         {
-          id: user1,
           label: user1,
           data: user1Rating,
           connectNulls: true,
+          showMark: false,
         },
         {
-          id: user2,
           label: user2,
           data: user2Rating,
           connectNulls: true,
+          showMark: false,
         },
       ]}
       width={1000}

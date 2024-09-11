@@ -17,7 +17,6 @@ function MaxSubmissionTable({
         xAxis={[{ scaleType: "band", data: ["Day", "Week ", "Month "] }]}
         series={[
           {
-            id: user1,
             label: user1,
             data: [
               maxSubmissionDataObj.user1MaxSubmissionsDay,
@@ -26,7 +25,6 @@ function MaxSubmissionTable({
             ],
           },
           {
-            id: user2,
             label: user2,
 
             data: [

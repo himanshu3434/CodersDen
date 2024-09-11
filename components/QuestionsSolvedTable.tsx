@@ -22,12 +22,10 @@ export default function QuestionsSolvedTable({
       xAxis={[{ scaleType: "band", data: ["Easy ", "Medium ", "Hard "] }]}
       series={[
         {
-          id: user1,
           label: user1,
           data: [easySolvedUser1, mediumSolvedUser1, hardSolvedUser1],
         },
         {
-          id: user2,
           label: user2,
           data: [easySolvedUser2, mediumSolvedUser2, hardSolvedUser2],
         },

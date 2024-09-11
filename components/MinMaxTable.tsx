@@ -18,12 +18,10 @@ export default function MinMaxTable({
       xAxis={[{ scaleType: "band", data: ["Min ", "Curr ", "Max "] }]}
       series={[
         {
-          id: user1,
           label: user1,
           data: [minRatingUser1, currentRatingUser1, maxRatingUser1],
         },
         {
-          id: user2,
           label: user2,
 
           data: [minRatingUser2, currentRatingUser2, maxRatingUser2],
