@@ -5,8 +5,8 @@ export type ratingChangeType = {
   problemsSolved2: string;
   distance: number;
   userWon: boolean;
-  finishTimeInSeconds1: string;
-  finishTimeInSeconds2: string;
+  finishTimeInSeconds1: number;
+  finishTimeInSeconds2: number;
   title: string;
 };
 export type minMaxtype = {

@@ -35,18 +35,18 @@ function GetStats() {
   };
 
   // Memoizing the JSX for the tables to avoid re-rendering
-  const ratingTable = useMemo(
-    () =>
-      data && (
-        <RatingTable
-          valid={data.valid}
-          user1={data.user1}
-          user2={data.user2}
-          commonContests={data.commonContests}
-        />
-      ),
-    [data]
-  );
+  // const ratingTable = useMemo(
+  //   () =>
+  //     data && (
+  //       <RatingTable
+  //         valid={data.valid}
+  //         user1={data.user1}
+  //         user2={data.user2}
+  //         commonContests={data.commonContests}
+  //       />
+  //     ),
+  //   [data]
+  // );
   const contestWinComparison = useMemo(
     () =>
       data && (
@@ -144,7 +144,15 @@ function GetStats() {
         </Button>
       </div>
 
-      {ratingTable}
+      {/* {ratingTable} */}
+      {data && (
+        <RatingTable
+          valid={data.valid}
+          user1={data.user1}
+          user2={data.user2}
+          commonContests={data.commonContests}
+        />
+      )}
       {contestWinComparison}
       {totalContestPie}
       {minMaxTable}
