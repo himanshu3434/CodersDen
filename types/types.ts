@@ -27,6 +27,8 @@ export type tableDataObjType = {
   user2: string;
   user1Win: number;
   user2Win: number;
+  totalContestUser1: number;
+  totalContestUser2: number;
   commonContests: ratingChangeType[];
   allRatings: minMaxtype;
   allContestsUser1: contestType[];

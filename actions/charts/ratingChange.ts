@@ -20,6 +20,8 @@ export const RatingChange = async (
       commonContests: [],
       user1Win: 0,
       user2Win: 0,
+      totalContestUser1: 0,
+      totalContestUser2: 0,
       allRatings: {
         maxRatingUser1: 0,
         maxRatingUser2: 0,
@@ -46,7 +48,8 @@ export const RatingChange = async (
     const attendedContestsUser2 = user2Data.data.contestParticipation.filter(
       (contest: any) => contest.attended === true
     );
-
+    tableDataObj.totalContestUser1 = attendedContestsUser1.length;
+    tableDataObj.totalContestUser2 = attendedContestsUser2.length;
     attendedContestsUser1.forEach((contest1: any) => {
       attendedContestsUser2.forEach((contest2: any) => {
         if (contest1.contest.title === contest2.contest.title) {

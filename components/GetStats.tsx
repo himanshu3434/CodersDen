@@ -10,6 +10,7 @@ import QuestionsSolvedTable from "./QuestionsSolvedTable";
 import ContestTimeLine from "./ContestTimeLine";
 import Submissions from "./Submissions";
 import ContestWinCom from "./ContestWinCom";
+import TotalContestPie from "./TotalContestPie";
 
 function GetStats() {
   const [user1, setUser1] = useState("");
@@ -54,6 +55,19 @@ function GetStats() {
           user2={data.user2}
           user1Win={data.user1Win}
           user2Win={data.user2Win}
+        />
+      ),
+    [data]
+  );
+
+  const totalContestPie = useMemo(
+    () =>
+      data && (
+        <TotalContestPie
+          user1={data.user1}
+          user2={data.user2}
+          totalContestUser1={data.totalContestUser1}
+          totalContestUser2={data.totalContestUser2}
         />
       ),
     [data]
@@ -131,11 +145,12 @@ function GetStats() {
       </div>
 
       {ratingTable}
+      {contestWinComparison}
+      {totalContestPie}
       {minMaxTable}
       {questionsSolvedTable}
       {contestTimeLine}
       {submissions}
-      {contestWinComparison}
     </div>
   );
 }
