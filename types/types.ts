@@ -8,6 +8,7 @@ export type ratingChangeType = {
   finishTimeInSeconds1: number;
   finishTimeInSeconds2: number;
   title: string;
+  timestamp: number;
 };
 export type minMaxtype = {
   maxRatingUser1: number;

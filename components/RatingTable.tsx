@@ -4,19 +4,34 @@ import React from "react";
 
 function RatingTable({ user1, user2, commonContests }: RatingTableUiType) {
   const [option, setOption] = React.useState(0);
+  const updatedCommonContests = commonContests.map((contest) => {
+    const date = new Date(contest.timestamp * 1000); // Convert Unix timestamp to milliseconds
+    const options: Intl.DateTimeFormatOptions = {
+      year: "numeric",
+      month: "short",
+      day: "numeric",
+    };
+    const formattedDate = date.toLocaleDateString("en-US", options); // Format date
+    return {
+      ...contest,
+      timestamp: formattedDate, // Update the timestamp with the formatted date
+    };
+  });
 
   const ratingTable = (
     <div>
       <table className="min-w-[70vw]   ">
         <thead className="text-xl bg-blue-400  text-white h-[7vh] ">
+          <th>Date</th>
           <th>Common Contest</th>
           <th className="text-purple-300">{user1}</th>
           <th className="text-yellow-300">{user2}</th>
           <th className="text-green-300">Distance</th>
         </thead>
         <tbody className=" text-center text-lg bg-white ">
-          {commonContests.map((contest, index) => (
+          {updatedCommonContests.map((contest, index) => (
             <tr key={index} className=" hover:bg-gray-300 ">
+              <td className="py-2 text-black">{contest.timestamp}</td>
               <td className="py-2 text-black">{contest.title}</td>
               <td className="text-purple-400">{contest.ranking1}</td>
               <td className="text-yellow-600">{contest.ranking2}</td>
@@ -41,6 +56,7 @@ function RatingTable({ user1, user2, commonContests }: RatingTableUiType) {
       <table className="min-w-[70vw] border-collapse border border-gray-200">
         <thead className="text-xl bg-blue-400 text-white h-[7vh]">
           <tr>
+            <th>Date</th>
             <th className="px-4 py-2">Common Contest</th>
             <th className="text-purple-300  py-2 space-y-2 ">
               <div className="">{user1}</div>
@@ -61,12 +77,15 @@ function RatingTable({ user1, user2, commonContests }: RatingTableUiType) {
           </tr>
         </thead>
         <tbody className="text-center text-lg bg-white">
-          {commonContests.map((contest, index) => {
+          {updatedCommonContests.map((contest, index) => {
             const time1 = formatTime(contest.finishTimeInSeconds1);
             const time2 = formatTime(contest.finishTimeInSeconds2);
 
             return (
               <tr key={index} className="hover:bg-gray-300">
+                <td className="py-2 text-black border border-gray-200">
+                  {contest.timestamp}
+                </td>
                 <td className="py-2 text-black border border-gray-200">
                   {contest.title}
                 </td>

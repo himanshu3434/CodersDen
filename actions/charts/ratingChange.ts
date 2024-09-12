@@ -66,6 +66,7 @@ export const RatingChange = async (
             finishTimeInSeconds2: contest2.finishTimeInSeconds,
 
             title: contest1.contest.title,
+            timestamp: contest1.contest.startTime,
           };
 
           tableDataObj.commonContests.push(commonContestObj);
