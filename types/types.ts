@@ -89,3 +89,14 @@ export type AllSubmissionDataType = {
   availableYearsUser1: number[];
   availableYearsUser2: number[];
 };
+
+export type tagProblemType = {
+  tagName: string;
+  problemsSolved: number;
+};
+export type typesQuestionSolvedObjType = {
+  user1: string;
+  user2: string;
+  tagProblemUser1: tagProblemType[];
+  tagProblemUser2: tagProblemType[];
+};

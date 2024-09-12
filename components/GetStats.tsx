@@ -3,7 +3,11 @@ import React, { useState, useCallback, useMemo } from "react";
 import RatingTable from "./RatingTable";
 import { RatingChange } from "@/actions/charts/ratingChange";
 import Button from "./Button";
-import { questionSolvedTableObjType, tableDataObjType } from "@/types/types";
+import {
+  questionSolvedTableObjType,
+  tableDataObjType,
+  typesQuestionSolvedObjType,
+} from "@/types/types";
 import MinMaxTable from "./MinMaxTable";
 import { QuestionSolved } from "@/actions/charts/questionSolved";
 import QuestionsSolvedTable from "./QuestionsSolvedTable";
@@ -11,6 +15,8 @@ import ContestTimeLine from "./ContestTimeLine";
 import Submissions from "./Submissions";
 import ContestWinCom from "./ContestWinCom";
 import TotalContestPie from "./TotalContestPie";
+import { TypesQuestionSolved } from "@/actions/charts/typesofquestion";
+import TypesofQuestions from "./TypesofQuestions";
 
 function GetStats() {
   const [user1, setUser1] = useState("");
@@ -19,16 +25,20 @@ function GetStats() {
   const [data, setData] = useState<tableDataObjType>();
   const [questionSolvedTableData, setQuestionSolvedTableData] =
     useState<questionSolvedTableObjType>();
+  const [typesQuestionSolvedData, setTypesQuestionSolvedData] =
+    useState<typesQuestionSolvedObjType>();
   const handlerClick = async () => {
     setError(false);
     setData(undefined);
     setQuestionSolvedTableData(undefined);
+    setTypesQuestionSolvedData(undefined);
     const alldata = await RatingChange(user1, user2);
     const questionSolvedTableObj = await QuestionSolved(user1, user2);
-
+    const typesQuestionSolvedObj = await TypesQuestionSolved(user1, user2);
     if (alldata.valid) {
       setData(alldata);
       setQuestionSolvedTableData(questionSolvedTableObj);
+      setTypesQuestionSolvedData(typesQuestionSolvedObj);
     } else {
       setError(true);
     }
@@ -113,6 +123,18 @@ function GetStats() {
     () => data && <Submissions user1={data.user1} user2={data.user2} />,
     [data]
   );
+  const typesofQuestions = useMemo(
+    () =>
+      typesQuestionSolvedData && (
+        <TypesofQuestions
+          user1={typesQuestionSolvedData.user1}
+          user2={typesQuestionSolvedData.user2}
+          tagProblemUser1={typesQuestionSolvedData.tagProblemUser1}
+          tagProblemUser2={typesQuestionSolvedData.tagProblemUser2}
+        />
+      ),
+    [typesQuestionSolvedData]
+  );
 
   return (
     <div className="flex flex-col justify-center items-center">
@@ -159,6 +181,7 @@ function GetStats() {
       {questionsSolvedTable}
       {contestTimeLine}
       {submissions}
+      {typesofQuestions}
     </div>
   );
 }
