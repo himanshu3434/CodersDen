@@ -25,10 +25,19 @@ export type tableDataObjType = {
   valid: boolean;
   user1: string;
   user2: string;
+  user1Win: number;
+  user2Win: number;
   commonContests: ratingChangeType[];
   allRatings: minMaxtype;
   allContestsUser1: contestType[];
   allContestsUser2: contestType[];
+};
+export type RatingTableUiType = {
+  valid: boolean;
+  user1: string;
+  user2: string;
+
+  commonContests: ratingChangeType[];
 };
 
 export type minMaxTablePropsType = {

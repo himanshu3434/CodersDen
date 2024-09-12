@@ -1,7 +1,7 @@
-import { tableDataObjType } from "@/types/types";
+import { RatingTableUiType } from "@/types/types";
 import React from "react";
 
-function RatingTable({ user1, user2, commonContests }: tableDataObjType) {
+function RatingTable({ user1, user2, commonContests }: RatingTableUiType) {
   return (
     <div className="overflow-x-auto flex justify-center ">
       <table className="min-w-[70vw] shadow-lg  ">

@@ -9,6 +9,7 @@ import { QuestionSolved } from "@/actions/charts/questionSolved";
 import QuestionsSolvedTable from "./QuestionsSolvedTable";
 import ContestTimeLine from "./ContestTimeLine";
 import Submissions from "./Submissions";
+import ContestWinCom from "./ContestWinCom";
 
 function GetStats() {
   const [user1, setUser1] = useState("");
@@ -41,14 +42,22 @@ function GetStats() {
           user1={data.user1}
           user2={data.user2}
           commonContests={data.commonContests}
-          allRatings={data.allRatings}
-          allContestsUser1={data.allContestsUser1}
-          allContestsUser2={data.allContestsUser2}
         />
       ),
     [data]
   );
-
+  const contestWinComparison = useMemo(
+    () =>
+      data && (
+        <ContestWinCom
+          user1={data.user1}
+          user2={data.user2}
+          user1Win={data.user1Win}
+          user2Win={data.user2Win}
+        />
+      ),
+    [data]
+  );
   const minMaxTable = useMemo(
     () =>
       data && (
@@ -126,6 +135,7 @@ function GetStats() {
       {questionsSolvedTable}
       {contestTimeLine}
       {submissions}
+      {contestWinComparison}
     </div>
   );
 }

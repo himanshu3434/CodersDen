@@ -18,6 +18,8 @@ export const RatingChange = async (
       user1,
       user2,
       commonContests: [],
+      user1Win: 0,
+      user2Win: 0,
       allRatings: {
         maxRatingUser1: 0,
         maxRatingUser2: 0,
@@ -66,6 +68,14 @@ export const RatingChange = async (
           tableDataObj.commonContests.push(commonContestObj);
         }
       });
+    });
+
+    tableDataObj.commonContests.forEach((contest: ratingChangeType) => {
+      if (contest.userWon) {
+        tableDataObj.user1Win++;
+      } else {
+        tableDataObj.user2Win++;
+      }
     });
 
     const maxRatingUser1 = user1Data.data.contestParticipation
