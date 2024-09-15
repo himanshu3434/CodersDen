@@ -45,18 +45,18 @@ function GetStats() {
   };
 
   // Memoizing the JSX for the tables to avoid re-rendering
-  // const ratingTable = useMemo(
-  //   () =>
-  //     data && (
-  //       <RatingTable
-  //         valid={data.valid}
-  //         user1={data.user1}
-  //         user2={data.user2}
-  //         commonContests={data.commonContests}
-  //       />
-  //     ),
-  //   [data]
-  // );
+  const ratingTable = useMemo(
+    () =>
+      data && (
+        <RatingTable
+          valid={data.valid}
+          user1={data.user1}
+          user2={data.user2}
+          commonContests={data.commonContests}
+        />
+      ),
+    [data]
+  );
   const contestWinComparison = useMemo(
     () =>
       data && (
@@ -166,22 +166,28 @@ function GetStats() {
         </Button>
       </div>
 
-      {/* {ratingTable} */}
       {data && (
-        <RatingTable
-          valid={data.valid}
-          user1={data.user1}
-          user2={data.user2}
-          commonContests={data.commonContests}
-        />
+        <div className="text-center">
+          <div>
+            <h1>Basic Comparison </h1>
+
+            <div>{submissions}</div>
+            <div>{questionsSolvedTable}</div>
+          </div>
+          <div>
+            <h1>Contest Comparison</h1>
+
+            <div>{contestTimeLine}</div>
+            <div>{contestWinComparison}</div>
+            <div>{totalContestPie}</div>
+            <div>{minMaxTable}</div>
+          </div>
+
+          {ratingTable}
+
+          {typesofQuestions}
+        </div>
       )}
-      {contestWinComparison}
-      {totalContestPie}
-      {minMaxTable}
-      {questionsSolvedTable}
-      {contestTimeLine}
-      {submissions}
-      {typesofQuestions}
     </div>
   );
 }
