@@ -7,7 +7,7 @@ import { useState } from "react";
 
 export default function Home() {
   return (
-    <div>
+    <div className="dark:bg-green-500 h-screen">
       <NavBar />
       <div className="max-w-[70vw] mx-auto">
         <GetStats />
