@@ -17,6 +17,7 @@ import ContestWinCom from "./ContestWinCom";
 import TotalContestPie from "./TotalContestPie";
 import { TypesQuestionSolved } from "@/actions/charts/typesofquestion";
 import TypesofQuestions from "./TypesofQuestions";
+import { Slider } from "@mui/material";
 
 function GetStats() {
   const [user1, setUser1] = useState("");
@@ -137,22 +138,22 @@ function GetStats() {
   );
 
   return (
-    <div className="flex flex-col justify-center items-center">
-      <div className="shadow-lg mx-auto flex flex-col items-center w-[30rem] p-5 my-7">
+    <div className="flex flex-col justify-center items-center ">
+      <div className="shadow-lg mx-auto flex flex-col items-center w-[30rem] p-5 my-7 dark:bg-semiblack dark:rounded-lg">
         <div className="my-3 flex">
           <input
             type="text"
             onChange={(e) => setUser1(e.target.value)}
             value={user1}
             placeholder="Ex:babu_323"
-            className="mx-2 w-48 h-10 rounded-md p-3 border-b-2 outline-none focus:border-blue-400"
+            className="mx-2 w-48 h-10 rounded-md p-3 border-b-2 outline-none focus:border-blue-400 dark:bg-semiblack dark:placeholder-slate-500 dark:text-white"
           />
           <input
             type="text"
             onChange={(e) => setUser2(e.target.value)}
             value={user2}
             placeholder="Ex:shubham_123"
-            className="w-48 h-10 rounded-md p-3 border-b-2 outline-none focus:border-blue-400"
+            className="w-48 h-10 rounded-md p-3 border-b-2 outline-none focus:border-blue-400 dark:bg-semiblack dark:placeholder-slate-500 dark:text-white"
           />
         </div>
         {error && <div className="my-4 text-red-600">User Not Found</div>}

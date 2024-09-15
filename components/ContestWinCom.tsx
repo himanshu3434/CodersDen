@@ -28,12 +28,7 @@ function ContestWinCom({
             arcLabel: (params) => params.value + " wins" ?? "",
           },
         ]}
-        sx={{
-          [`& .${pieArcLabelClasses.root}`]: {
-            fontWeight: "bold",
-            fill: "white",
-          },
-        }}
+        slotProps={{ pieArcLabel: { className: "fill-green-400" } }}
         width={400}
         height={200}
       />

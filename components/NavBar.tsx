@@ -22,16 +22,14 @@ function NavBar() {
   };
 
   return (
-    <div className=" shadow-md shadow-blue-300">
+    <div className=" shadow-sm shadow-blue-400 ">
       <div className="flex justify-between h-16  max-w-[70vw] mx-auto  ">
         <div className="max-w-[50vw] w-full flex items-center">
-          <h1 className="font-bold text-red-500 text-xl dark:text-blue-500">
-            CodersDen
-          </h1>
+          <h1 className="font-bold text-red-500 text-xl ">CodersDen</h1>
         </div>
 
-        <div className="max-w-[50vw] w-full  flex justify-end  pr-7">
-          <button onClick={toggleModeHandler} className=" px-3 rounded-b-lg ">
+        <div className="max-w-[50vw] w-full  flex justify-end  pr-7 dark:text-white">
+          <button onClick={toggleModeHandler} className=" px-3 rounded-b-lg  ">
             {mode === "dark" ? <IoSunny /> : <IoMoon />}
           </button>
           <button className="hover:bg-red-400 px-3 rounded-b-lg hover:text-white">

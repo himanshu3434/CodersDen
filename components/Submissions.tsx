@@ -31,7 +31,7 @@ function Submissions({ user1, user2 }: { user1: string; user2: string }) {
   return (
     <div>
       {allSubmissionDetails && (
-        <div className="flex flex-col justify-center items-center">
+        <div className="flex flex-col justify-center items-center ">
           <select
             value={year}
             onChange={(e) => setYear(parseInt(e.target.value))}

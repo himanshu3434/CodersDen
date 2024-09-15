@@ -6,9 +6,14 @@ const config: Config = {
     "./components/**/*.{js,ts,jsx,tsx,mdx}",
     "./app/**/*.{js,ts,jsx,tsx,mdx}",
   ],
+
   darkMode: "class",
   theme: {
     extend: {
+      colors: {
+        black: "#1A1A1A",
+        semiblack: "#363636",
+      },
       backgroundImage: {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
         "gradient-conic":

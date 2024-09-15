@@ -1,5 +1,5 @@
 import { MaxSubmissionDataObjType } from "@/types/types";
-import { BarChart } from "@mui/x-charts";
+import { axisClasses, BarChart, barElementClasses } from "@mui/x-charts";
 import React from "react";
 
 function MaxSubmissionTable({
@@ -14,6 +14,7 @@ function MaxSubmissionTable({
   return (
     <div>
       <BarChart
+        className="dark:bg-semiblack"
         xAxis={[{ scaleType: "band", data: ["Day", "Week ", "Month "] }]}
         series={[
           {
