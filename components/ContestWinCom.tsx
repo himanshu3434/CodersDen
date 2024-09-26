@@ -18,7 +18,7 @@ function ContestWinCom({
         <h1 className="text-3xl font-bold text-center ">Leaderboard</h1>
       </div>
       <PieChart
-        colors={["#2E96FF", "#0EACAA"]} // Use palette
+        colors={["#D4ADFC", "#FDAF7B"]} // Use palette
         series={[
           {
             data: [
@@ -28,7 +28,7 @@ function ContestWinCom({
             arcLabel: (params) => params.value + " wins" ?? "",
           },
         ]}
-        slotProps={{ pieArcLabel: { className: "fill-green-400" } }}
+        slotProps={{ pieArcLabel: { className: "fill-white font-bold" } }}
         width={400}
         height={200}
       />

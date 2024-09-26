@@ -18,7 +18,7 @@ function TotalContestPie({
         <h1 className="font-bold text-xl pl-20 ">Total contest </h1>
       </div>
       <PieChart
-        colors={["#2E96FF", "#0EACAA"]} // Use palette
+        colors={["#D4ADFC", "#FDAF7B"]} // Use palette
         series={[
           {
             data: [

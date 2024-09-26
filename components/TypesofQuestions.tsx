@@ -3,7 +3,7 @@ import { BarChart } from "@mui/x-charts/BarChart";
 import { tagProblemType, typesQuestionSolvedObjType } from "@/types/types";
 
 const chartSetting = {
-  width: 5000,
+  width: 3000,
   height: 600,
 };
 const valueFormatter = (value: number | null) => `${value}`;
@@ -50,26 +50,60 @@ export default function TypesofQuestions({
   const dataset = mergeTagsAndPrepareDataset(tagProblemUser1, tagProblemUser2);
 
   return (
-    <div className=" relative overflow-scroll  w-[30rem] h-[40rem]">
-      <div className="absolute   ">
+    <div className=" relative overflow-scroll scrollbar-hide w-[60rem] h-[40rem]">
+      <div className="">
         <BarChart
           dataset={dataset}
-          xAxis={[{ scaleType: "band", dataKey: "tagName" }]}
+          xAxis={[
+            {
+              scaleType: "band",
+              dataKey: "tagName",
+
+              tickLabelStyle: {
+                whiteSpace: "normal",
+                overflow: "hidden",
+                textOverflow: "ellipsis",
+                display: "-webkit-box",
+                WebkitLineClamp: 2,
+                WebkitBoxOrient: "vertical",
+                fontSize: 12,
+                overflowWrap: "break-word", // Add this
+              },
+            },
+          ]}
           series={[
-            { dataKey: "user1", label: user1, valueFormatter },
-            { dataKey: "user2", label: user2, valueFormatter },
+            {
+              dataKey: "user1",
+              label: user1,
+              valueFormatter,
+              color: "#FDAF7B",
+              // FDAF7B   FFB38E
+            },
+            {
+              dataKey: "user2",
+              label: user2,
+              valueFormatter,
+              color: "#D4ADFC",
+              // DFCCFB  D0BFFF D4ADFC   BEADFA
+            },
           ]}
           sx={{
-            mb: 2,
-            display: "flex",
-            flexDirection: "column",
+            mb: 0,
+            // "& .MuiChartsAxis-left .MuiChartsAxis-tickLabel": {
+            //   strokeWidth: "0.4",
+            //   fill: "#ffffff",
+            // },
+            // wordWrap: "break-word"
 
-            overflow: "hidden",
-            overflowX: "scroll",
+            // display: "flex",
+            // flexDirection: "column",
+
+            // overflow: "hidden",
+            // overflowX: "scroll",
             // justifyContent="flex-end" # DO NOT USE THIS WITH 'scroll'
           }}
           layout="vertical"
-          borderRadius={100}
+          borderRadius={15}
           {...chartSetting}
           grid={{ vertical: true }}
         />

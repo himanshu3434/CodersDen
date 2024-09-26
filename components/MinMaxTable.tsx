@@ -20,15 +20,18 @@ export default function MinMaxTable({
         {
           label: user1,
           data: [minRatingUser1, currentRatingUser1, maxRatingUser1],
+          color: "#FDAF7B",
         },
         {
           label: user2,
 
           data: [minRatingUser2, currentRatingUser2, maxRatingUser2],
+          color: "#D4ADFC",
         },
       ]}
       width={500}
       height={300}
+      borderRadius={18}
     />
   );
 }
