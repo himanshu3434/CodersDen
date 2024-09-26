@@ -12,6 +12,7 @@ const config: Config = {
     extend: {
       colors: {
         black: "#1A1A1A",
+        purple: "#CBACF9",
         semiblack: "#363636",
       },
       backgroundImage: {

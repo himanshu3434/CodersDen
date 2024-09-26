@@ -146,7 +146,7 @@ function GetStats() {
             onChange={(e) => setUser1(e.target.value)}
             value={user1}
             placeholder="Ex:babu_323"
-            className="mx-2 w-48 h-10 rounded-md p-3 border-b-2 outline-none focus:border-blue-400 dark:bg-semiblack dark:placeholder-slate-500 dark:text-white"
+            className="mx-2 w-48 h-10 rounded-md p-3 border-b-2 outline-none focus:border-blue-400 dark:bg-semiblack dark:placeholder-slate-500 dark:text-white "
           />
           <input
             type="text"
@@ -168,10 +168,12 @@ function GetStats() {
       </div>
 
       {data && (
-        <div className="text-center">
+        <div className="text-center dark:text-white ">
           <div>
-            <h1>Basic Comparison </h1>
-
+            <h1 className="text-3xl font-bold dark:text-purple">
+              Basic Comparison{" "}
+            </h1>
+            <hr className="w-[50vw] mx-auto h-1 bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 my-8 border-0" />
             <div>{submissions}</div>
             <div>{questionsSolvedTable}</div>
           </div>

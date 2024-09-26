@@ -13,6 +13,13 @@ function MaxSubmissionTable({
 }) {
   return (
     <div>
+      <div className="flex items-center my-8">
+        <hr className="flex-grow border-t-2 border-semiblack mr-4 " />
+        <span className="text-xl font-semibold dark:text-slate-500">
+          Max Submission
+        </span>
+        <hr className="flex-grow border-t-2 border-semiblack ml-4" />
+      </div>
       <BarChart
         className="dark:bg-semiblack"
         xAxis={[{ scaleType: "band", data: ["Day", "Week ", "Month "] }]}
@@ -37,6 +44,11 @@ function MaxSubmissionTable({
         ]}
         width={400}
         height={300}
+        slotProps={{
+          barLabel: {
+            style: { fill: "white" },
+          },
+        }}
       />
     </div>
   );

@@ -35,6 +35,7 @@ function Submissions({ user1, user2 }: { user1: string; user2: string }) {
           <select
             value={year}
             onChange={(e) => setYear(parseInt(e.target.value))}
+            className="dark:bg-semiblack p-3 outline-none  rounded-xl my-2"
           >
             {availableYears.map((year) => (
               <option key={year} value={year}>
