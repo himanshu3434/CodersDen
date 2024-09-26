@@ -7,6 +7,7 @@ import {
   questionSolvedTableObjType,
   tableDataObjType,
   typesQuestionSolvedObjType,
+  userSessionBeatsObjType,
 } from "@/types/types";
 import MinMaxTable from "./MinMaxTable";
 import { QuestionSolved } from "@/actions/charts/questionSolved";
@@ -18,6 +19,9 @@ import TotalContestPie from "./TotalContestPie";
 import { TypesQuestionSolved } from "@/actions/charts/typesofquestion";
 import TypesofQuestions from "./TypesofQuestions";
 import { Slider } from "@mui/material";
+import { UserSessionBeats } from "@/actions/charts/userSessionBeats";
+import { Session } from "inspector/promises";
+import SessionBeatsTable from "./SessionBeatsTable";
 
 function GetStats() {
   const [user1, setUser1] = useState("");
@@ -28,6 +32,8 @@ function GetStats() {
     useState<questionSolvedTableObjType>();
   const [typesQuestionSolvedData, setTypesQuestionSolvedData] =
     useState<typesQuestionSolvedObjType>();
+  const [sessionBeatsData, setSessionBeatsData] =
+    useState<userSessionBeatsObjType>();
   const handlerClick = async () => {
     setError(false);
     setData(undefined);
@@ -36,10 +42,13 @@ function GetStats() {
     const alldata = await RatingChange(user1, user2);
     const questionSolvedTableObj = await QuestionSolved(user1, user2);
     const typesQuestionSolvedObj = await TypesQuestionSolved(user1, user2);
+    const sessionBeatsObj = await UserSessionBeats(user1, user2);
+
     if (alldata.valid) {
       setData(alldata);
       setQuestionSolvedTableData(questionSolvedTableObj);
       setTypesQuestionSolvedData(typesQuestionSolvedObj);
+      setSessionBeatsData(sessionBeatsObj);
     } else {
       setError(true);
     }
@@ -137,6 +146,18 @@ function GetStats() {
     [typesQuestionSolvedData]
   );
 
+  const sessionBeats = useMemo(
+    () =>
+      sessionBeatsData && (
+        <SessionBeatsTable
+          user1={sessionBeatsData.user1}
+          user2={sessionBeatsData.user2}
+          allSessionBeats={sessionBeatsData.allSessionBeats}
+        />
+      ),
+    [sessionBeatsData]
+  );
+
   return (
     <div className="flex flex-col justify-center items-center ">
       <div className="shadow-lg mx-auto flex flex-col items-center w-[30rem] p-5 my-7 dark:bg-semiblack dark:rounded-lg">
@@ -189,6 +210,8 @@ function GetStats() {
           {ratingTable}
 
           {typesofQuestions}
+
+          {sessionBeats}
         </div>
       )}
     </div>

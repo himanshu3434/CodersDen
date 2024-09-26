@@ -101,3 +101,17 @@ export type typesQuestionSolvedObjType = {
   tagProblemUser1: tagProblemType[];
   tagProblemUser2: tagProblemType[];
 };
+
+export type allUserSessionType = {
+  user1SessionBeatsEasy: number;
+  user1SessionBeatsMedium: number;
+  user1SessionBeatsHard: number;
+  user2SessionBeatsEasy: number;
+  user2SessionBeatsMedium: number;
+  user2SessionBeatsHard: number;
+};
+export type userSessionBeatsObjType = {
+  user1: string;
+  user2: string;
+  allSessionBeats: allUserSessionType;
+};
