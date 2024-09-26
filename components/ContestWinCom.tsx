@@ -13,9 +13,11 @@ function ContestWinCom({
   user2Win: number;
 }) {
   return (
-    <div>
+    <div className="my-4">
       <div>
-        <h1 className="text-3xl font-bold text-center ">Leaderboard</h1>
+        <h1 className="text-3xl font-bold text-center mr-11 mb-5">
+          Leaderboard
+        </h1>
       </div>
       <PieChart
         colors={["#D4ADFC", "#FDAF7B"]} // Use palette

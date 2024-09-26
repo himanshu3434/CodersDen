@@ -13,9 +13,11 @@ function TotalContestPie({
   totalContestUser2: number;
 }) {
   return (
-    <div className="my-7">
+    <div className="my-4">
       <div>
-        <h1 className="font-bold text-xl pl-20 ">Total contest </h1>
+        <h1 className="text-3xl font-bold text-center mr-11 mb-5">
+          Total Contest
+        </h1>
       </div>
       <PieChart
         colors={["#D4ADFC", "#FDAF7B"]} // Use palette

@@ -212,12 +212,19 @@ function GetStats() {
             <div>{questionsSolvedTable}</div>
           </div>
           <div>
-            <h1>Contest Comparison</h1>
+            <h1>
+              <h1 className="text-3xl font-bold dark:text-purple">
+                Contest Comparison{" "}
+              </h1>
+              <hr className="w-[50vw] mx-auto h-1 bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 my-8 border-0" />
+            </h1>
 
             <div>{contestTimeLine}</div>
-            <div>{contestWinComparison}</div>
-            <div>{totalContestPie}</div>
-            <div>{minMaxTable}</div>
+            <div className="flex mt-5 justify-between ">
+              <div>{contestWinComparison}</div>
+              <div>{totalContestPie}</div>
+            </div>
+            <div className="flex justify-center mt-5">{minMaxTable}</div>
           </div>
 
           {ratingTable}

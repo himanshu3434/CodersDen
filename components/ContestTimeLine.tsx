@@ -103,12 +103,14 @@ export default function ContestTimeLine({
           data: user1Rating,
           connectNulls: true,
           showMark: false,
+          color: "#FDAF7B",
         },
         {
           label: user2,
           data: user2Rating,
           connectNulls: true,
           showMark: false,
+          color: "#D4ADFC",
         },
       ]}
       width={1000}
