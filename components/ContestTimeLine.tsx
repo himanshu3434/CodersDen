@@ -87,6 +87,11 @@ export default function ContestTimeLine({
           data: xAxisData,
           scaleType: "point",
           dataKey: "month",
+          valueFormatter: (dateString) => {
+            // Split the date string into parts
+            const [monthDay, year] = dateString.split(", ");
+            return `${monthDay}\n${year}`; // Return two lines
+          },
         },
       ]}
       yAxis={[

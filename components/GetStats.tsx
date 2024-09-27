@@ -202,18 +202,21 @@ function GetStats() {
       </div>
 
       {data && (
-        <div className="text-center dark:text-white ">
-          <div>
+        <div>
+          <div className="text-center dark:text-white ">
             <h1 className="text-3xl font-bold dark:text-purple">
               Basic Comparison{" "}
             </h1>
             <hr className="w-[50vw] mx-auto h-1 bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 my-8 border-0" />
             <div>{submissions}</div>
-            <div>{questionsSolvedTable}</div>
+            <div className="flex  justify-center items-center mt-5">
+              <div>{questionsSolvedTable}</div>
+              <div>{sessionBeats}</div>
+            </div>
           </div>
           <div>
             <h1>
-              <h1 className="text-3xl font-bold dark:text-purple">
+              <h1 className="text-3xl font-bold dark:text-purple text-center">
                 Contest Comparison{" "}
               </h1>
               <hr className="w-[50vw] mx-auto h-1 bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 my-8 border-0" />
@@ -230,8 +233,6 @@ function GetStats() {
           {ratingTable}
 
           {typesofQuestions}
-
-          {sessionBeats}
         </div>
       )}
     </div>

@@ -18,20 +18,25 @@ export default function QuestionsSolvedTable({
   const hardSolvedUser2 = allSolvedQuestions.hardSolvedUser2;
 
   return (
-    <BarChart
-      xAxis={[{ scaleType: "band", data: ["Easy ", "Medium ", "Hard "] }]}
-      series={[
-        {
-          label: user1,
-          data: [easySolvedUser1, mediumSolvedUser1, hardSolvedUser1],
-        },
-        {
-          label: user2,
-          data: [easySolvedUser2, mediumSolvedUser2, hardSolvedUser2],
-        },
-      ]}
-      width={500}
-      height={300}
-    />
+    <div className="mr-8">
+      <BarChart
+        xAxis={[{ scaleType: "band", data: ["Easy ", "Medium ", "Hard "] }]}
+        series={[
+          {
+            label: user1,
+            data: [easySolvedUser1, mediumSolvedUser1, hardSolvedUser1],
+            color: "#FDAF7B",
+          },
+          {
+            label: user2,
+            data: [easySolvedUser2, mediumSolvedUser2, hardSolvedUser2],
+            color: "#D4ADFC",
+          },
+        ]}
+        width={400}
+        height={300}
+        borderRadius={18}
+      />
+    </div>
   );
 }

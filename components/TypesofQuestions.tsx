@@ -58,16 +58,13 @@ export default function TypesofQuestions({
             {
               scaleType: "band",
               dataKey: "tagName",
-
+              valueFormatter: (value: string) => {
+                return value.split(/[\s-]+/).join("\n");
+              },
               tickLabelStyle: {
-                whiteSpace: "normal",
-                overflow: "hidden",
-                textOverflow: "ellipsis",
-                display: "-webkit-box",
-                WebkitLineClamp: 2,
-                WebkitBoxOrient: "vertical",
-                fontSize: 12,
-                overflowWrap: "break-word", // Add this
+                fontSize: 11,
+                width: 1,
+                padding: 2,
               },
             },
           ]}
@@ -87,21 +84,6 @@ export default function TypesofQuestions({
               // DFCCFB  D0BFFF D4ADFC   BEADFA
             },
           ]}
-          sx={{
-            mb: 0,
-            // "& .MuiChartsAxis-left .MuiChartsAxis-tickLabel": {
-            //   strokeWidth: "0.4",
-            //   fill: "#ffffff",
-            // },
-            // wordWrap: "break-word"
-
-            // display: "flex",
-            // flexDirection: "column",
-
-            // overflow: "hidden",
-            // overflowX: "scroll",
-            // justifyContent="flex-end" # DO NOT USE THIS WITH 'scroll'
-          }}
           layout="vertical"
           borderRadius={15}
           {...chartSetting}

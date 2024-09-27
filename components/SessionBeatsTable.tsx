@@ -37,7 +37,7 @@ const SessionBeatsTable = ({
           color: "#D4ADFC",
         },
       ]}
-      width={500}
+      width={400}
       height={300}
       borderRadius={18}
     />

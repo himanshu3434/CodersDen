@@ -43,22 +43,24 @@ function Submissions({ user1, user2 }: { user1: string; user2: string }) {
               </option>
             ))}
           </select>
-          <div>
-            <MaxSubmissionTable
-              maxSubmissionDataObj={
-                allSubmissionDetails.maxSubmissionDataObjType
-              }
-              user1={user1}
-              user2={user2}
-            />
-          </div>
+          <div className="flex justify-between">
+            <div>
+              <MaxSubmissionTable
+                maxSubmissionDataObj={
+                  allSubmissionDetails.maxSubmissionDataObjType
+                }
+                user1={user1}
+                user2={user2}
+              />
+            </div>
 
-          <div>
-            <StreakSubmissionTable
-              user1={user1}
-              user2={user2}
-              allSubmissionDetails={allSubmissionDetails}
-            />
+            <div>
+              <StreakSubmissionTable
+                user1={user1}
+                user2={user2}
+                allSubmissionDetails={allSubmissionDetails}
+              />
+            </div>
           </div>
         </div>
       )}
