@@ -26,8 +26,7 @@ import SessionBeatsTable from "./SessionBeatsTable";
 function GetStats() {
   const [user1, setUser1] = useState("");
   const [user2, setUser2] = useState("");
-  const [lowercaseUser1, setLowercaseUser1] = useState("");
-  const [lowercaseUser2, setLowercaseUser2] = useState("");
+
   const [error, setError] = useState(false);
   const [data, setData] = useState<tableDataObjType>();
   const [questionSolvedTableData, setQuestionSolvedTableData] =
@@ -41,21 +40,11 @@ function GetStats() {
     setData(undefined);
     setQuestionSolvedTableData(undefined);
     setTypesQuestionSolvedData(undefined);
-    setLowercaseUser1(user1.toLowerCase().trim());
-    setLowercaseUser2(user2.toLowerCase().trim());
-    const alldata = await RatingChange(lowercaseUser1, lowercaseUser2);
-    const questionSolvedTableObj = await QuestionSolved(
-      lowercaseUser1,
-      lowercaseUser2
-    );
-    const typesQuestionSolvedObj = await TypesQuestionSolved(
-      lowercaseUser1,
-      lowercaseUser2
-    );
-    const sessionBeatsObj = await UserSessionBeats(
-      lowercaseUser1,
-      lowercaseUser2
-    );
+
+    const alldata = await RatingChange(user1, user2);
+    const questionSolvedTableObj = await QuestionSolved(user1, user2);
+    const typesQuestionSolvedObj = await TypesQuestionSolved(user1, user2);
+    const sessionBeatsObj = await UserSessionBeats(user1, user2);
 
     if (alldata.valid) {
       setData(alldata);

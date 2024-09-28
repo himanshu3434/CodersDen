@@ -1,7 +1,8 @@
 import * as React from "react";
 
 import { ContestTimeLinePropsType, contestType } from "@/types/types";
-import { LineChart } from "@mui/x-charts";
+// import { LineChart } from "@mui/x-charts";
+import { LineChart } from "@mui/x-charts/LineChart";
 
 // Function to merge timestamps and format them
 function mergeTimestamps(
@@ -79,7 +80,9 @@ export default function ContestTimeLine({
 
   const user1Rating = mapRatings(sortedContestsUser1, xAxisData);
   const user2Rating = mapRatings(sortedContestsUser2, xAxisData);
-  // console.log(user1Rating);
+  console.log(user1Rating);
+  console.log(xAxisData);
+  console.log(user2Rating);
   return (
     <LineChart
       xAxis={[
@@ -91,6 +94,10 @@ export default function ContestTimeLine({
             // Split the date string into parts
             const [monthDay, year] = dateString.split(", ");
             return `${monthDay}\n${year}`; // Return two lines
+          },
+          tickLabelInterval(value, index) {
+            // Display every 2nd label
+            return index % 5 === 0;
           },
         },
       ]}
