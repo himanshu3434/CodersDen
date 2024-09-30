@@ -84,49 +84,59 @@ export default function ContestTimeLine({
   console.log(xAxisData);
   console.log(user2Rating);
   return (
-    <LineChart
-      xAxis={[
-        {
-          data: xAxisData,
-          scaleType: "point",
-          dataKey: "month",
-          valueFormatter: (dateString) => {
-            // Split the date string into parts
-            const [monthDay, year] = dateString.split(", ");
-            return `${monthDay}\n${year}`; // Return two lines
+    <div>
+      <div className="flex items-center my-8 ">
+        <hr className="flex-grow border-t-2 border-semiblack mr-4  " />
+        <span className="text-xl font-semibold dark:text-slate-500">
+          Timeline
+        </span>
+        <hr className="flex-grow border-t-2 border-semiblack ml-4" />
+      </div>
+      <LineChart
+        className="dark:bg-semiblack rounded-xl dark:stroke-gray-300 dark:stroke-1"
+        xAxis={[
+          {
+            data: xAxisData,
+            scaleType: "point",
+            dataKey: "month",
+            valueFormatter: (dateString) => {
+              // Split the date string into parts
+              const [monthDay, year] = dateString.split(", ");
+              return `${monthDay}\n${year}`; // Return two lines
+            },
+            tickLabelInterval(value, index) {
+              // Display every 2nd label
+              return index % 5 === 0;
+            },
           },
-          tickLabelInterval(value, index) {
-            // Display every 2nd label
-            return index % 5 === 0;
-          },
-        },
-      ]}
-      yAxis={[
-        {
-          min: 1200, // Set the starting point of the y-axis
-          //   max: 4000, // Optionally set the maximum value
+        ]}
+        yAxis={[
+          {
+            min: 1200, // Set the starting point of the y-axis
+            //   max: 4000, // Optionally set the maximum value
 
-          scaleType: "linear",
-        },
-      ]}
-      series={[
-        {
-          label: user1,
-          data: user1Rating,
-          connectNulls: true,
-          showMark: false,
-          color: "#FDAF7B",
-        },
-        {
-          label: user2,
-          data: user2Rating,
-          connectNulls: true,
-          showMark: false,
-          color: "#D4ADFC",
-        },
-      ]}
-      width={1000}
-      height={300}
-    />
+            scaleType: "linear",
+          },
+        ]}
+        series={[
+          {
+            label: user1,
+            data: user1Rating,
+            connectNulls: true,
+            showMark: false,
+            color: "#FDAF7B",
+          },
+          {
+            label: user2,
+            data: user2Rating,
+            connectNulls: true,
+            showMark: false,
+            color: "#D4ADFC",
+          },
+        ]}
+        width={1000}
+        height={300}
+      />
+    </div>
   );
 }

@@ -31,14 +31,21 @@ function Submissions({ user1, user2 }: { user1: string; user2: string }) {
   return (
     <div>
       {allSubmissionDetails && (
-        <div className="flex flex-col justify-center items-center ">
+        <div className="flex flex-col justify-center items-center  ">
+          <div className="flex items-center my-8  w-2/3">
+            <hr className="flex-grow border-t-2 border-semiblack mr-4  " />
+            <span className="text-xl font-semibold dark:text-slate-500">
+              Submission Stats
+            </span>
+            <hr className="flex-grow border-t-2 border-semiblack ml-4" />
+          </div>
           <select
             value={year}
             onChange={(e) => setYear(parseInt(e.target.value))}
             className="dark:bg-semiblack p-3 outline-none  rounded-xl my-2"
           >
             {availableYears.map((year) => (
-              <option key={year} value={year}>
+              <option key={year} value={year} className="">
                 {year}
               </option>
             ))}

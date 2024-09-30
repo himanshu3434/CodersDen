@@ -13,6 +13,10 @@ const config: Config = {
       colors: {
         black: "#1A1A1A",
         purple: "#CBACF9",
+        purpleDark: "#B29FC9",
+        colorChartV1: "#FDAF7B",
+        colorChartV2: "#D4ADFC",
+
         semiblack: "#363636",
       },
       backgroundImage: {

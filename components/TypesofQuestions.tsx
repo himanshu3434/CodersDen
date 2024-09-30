@@ -50,45 +50,55 @@ export default function TypesofQuestions({
   const dataset = mergeTagsAndPrepareDataset(tagProblemUser1, tagProblemUser2);
 
   return (
-    <div className=" relative overflow-scroll scrollbar-hide w-[60rem] h-[40rem]">
-      <div className="">
-        <BarChart
-          dataset={dataset}
-          xAxis={[
-            {
-              scaleType: "band",
-              dataKey: "tagName",
-              valueFormatter: (value: string) => {
-                return value.split(/[\s-]+/).join("\n");
+    <div>
+      <h1>
+        <h1 className="text-3xl font-bold dark:text-purple text-center mt-20">
+          Type of Questions{" "}
+        </h1>
+        <hr className="w-[50vw] mx-auto h-1 bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 my-8 border-0" />
+      </h1>
+
+      <div className=" relative overflow-scroll scrollbar-hide w-[60rem] h-[40rem]">
+        <div className="">
+          <BarChart
+            className="dark:bg-semiblack rounded-xl dark:stroke-gray-300 dark:stroke-1"
+            dataset={dataset}
+            xAxis={[
+              {
+                scaleType: "band",
+                dataKey: "tagName",
+                valueFormatter: (value: string) => {
+                  return value.split(/[\s-]+/).join("\n");
+                },
+                tickLabelStyle: {
+                  fontSize: 11,
+                  width: 1,
+                  padding: 2,
+                },
               },
-              tickLabelStyle: {
-                fontSize: 11,
-                width: 1,
-                padding: 2,
+            ]}
+            series={[
+              {
+                dataKey: "user1",
+                label: user1,
+                valueFormatter,
+                color: "#FDAF7B",
+                // FDAF7B   FFB38E
               },
-            },
-          ]}
-          series={[
-            {
-              dataKey: "user1",
-              label: user1,
-              valueFormatter,
-              color: "#FDAF7B",
-              // FDAF7B   FFB38E
-            },
-            {
-              dataKey: "user2",
-              label: user2,
-              valueFormatter,
-              color: "#D4ADFC",
-              // DFCCFB  D0BFFF D4ADFC   BEADFA
-            },
-          ]}
-          layout="vertical"
-          borderRadius={15}
-          {...chartSetting}
-          grid={{ vertical: true }}
-        />
+              {
+                dataKey: "user2",
+                label: user2,
+                valueFormatter,
+                color: "#D4ADFC",
+                // DFCCFB  D0BFFF D4ADFC   BEADFA
+              },
+            ]}
+            layout="vertical"
+            borderRadius={15}
+            {...chartSetting}
+            grid={{ vertical: true }}
+          />
+        </div>
       </div>
     </div>
   );

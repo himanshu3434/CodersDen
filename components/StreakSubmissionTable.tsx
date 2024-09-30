@@ -21,6 +21,7 @@ function StreakSubmissionTable({
         <hr className="flex-grow border-t-2 border-semiblack ml-4" />
       </div>
       <BarChart
+        className="dark:bg-semiblack rounded-xl dark:stroke-gray-300 dark:stroke-1"
         xAxis={[
           {
             scaleType: "band",

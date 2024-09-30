@@ -14,24 +14,34 @@ export default function MinMaxTable({
   const maxRatingUser1 = allRatings.maxRatingUser1;
   const maxRatingUser2 = allRatings.maxRatingUser2;
   return (
-    <BarChart
-      xAxis={[{ scaleType: "band", data: ["Min ", "Curr ", "Max "] }]}
-      series={[
-        {
-          label: user1,
-          data: [minRatingUser1, currentRatingUser1, maxRatingUser1],
-          color: "#FDAF7B",
-        },
-        {
-          label: user2,
+    <div>
+      <div className="flex items-center my-8 ">
+        <hr className="flex-grow border-t-2 border-semiblack mr-4  " />
+        <span className="text-xl font-semibold dark:text-slate-500">
+          Rating
+        </span>
+        <hr className="flex-grow border-t-2 border-semiblack ml-4" />
+      </div>
+      <BarChart
+        className="dark:bg-semiblack rounded-xl dark:stroke-gray-300 dark:stroke-1"
+        xAxis={[{ scaleType: "band", data: ["Min ", "Curr ", "Max "] }]}
+        series={[
+          {
+            label: user1,
+            data: [minRatingUser1, currentRatingUser1, maxRatingUser1],
+            color: "#FDAF7B",
+          },
+          {
+            label: user2,
 
-          data: [minRatingUser2, currentRatingUser2, maxRatingUser2],
-          color: "#D4ADFC",
-        },
-      ]}
-      width={500}
-      height={300}
-      borderRadius={18}
-    />
+            data: [minRatingUser2, currentRatingUser2, maxRatingUser2],
+            color: "#D4ADFC",
+          },
+        ]}
+        width={500}
+        height={300}
+        borderRadius={18}
+      />
+    </div>
   );
 }

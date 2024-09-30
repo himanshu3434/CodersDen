@@ -14,12 +14,15 @@ function TotalContestPie({
 }) {
   return (
     <div className="my-4">
-      <div>
-        <h1 className="text-3xl font-bold text-center mr-11 mb-5">
+      <div className="flex items-center my-8 ">
+        <hr className="flex-grow border-t-2 border-semiblack mr-4  " />
+        <span className="text-xl font-semibold dark:text-slate-500">
           Total Contest
-        </h1>
+        </span>
+        <hr className="flex-grow border-t-2 border-semiblack ml-4" />
       </div>
       <PieChart
+        className="dark:bg-semiblack rounded-xl dark:stroke-gray-300 dark:stroke-1"
         colors={["#D4ADFC", "#FDAF7B"]} // Use palette
         series={[
           {
@@ -34,6 +37,7 @@ function TotalContestPie({
           [`& .${pieArcLabelClasses.root}`]: {
             fontWeight: "bold",
             fill: "white",
+            stroke: "transparent",
           },
         }}
         width={400}

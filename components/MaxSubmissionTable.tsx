@@ -1,6 +1,12 @@
 import { MaxSubmissionDataObjType } from "@/types/types";
-import { axisClasses, BarChart, barElementClasses } from "@mui/x-charts";
+import {
+  axisClasses,
+  BarChart,
+  barElementClasses,
+  BarLabelProps,
+} from "@mui/x-charts";
 import React from "react";
+import { styleText } from "util";
 
 function MaxSubmissionTable({
   maxSubmissionDataObj,
@@ -21,11 +27,12 @@ function MaxSubmissionTable({
         <hr className="flex-grow border-t-2 border-semiblack ml-4" />
       </div>
       <BarChart
-        className="dark:bg-semiblack"
+        className="dark:bg-semiblack rounded-xl dark:stroke-gray-300 dark:stroke-1"
         xAxis={[{ scaleType: "band", data: ["Day", "Week ", "Month "] }]}
         series={[
           {
             label: user1,
+
             data: [
               maxSubmissionDataObj.user1MaxSubmissionsDay,
               maxSubmissionDataObj.user1MaxSubmissionsWeek,
@@ -47,11 +54,6 @@ function MaxSubmissionTable({
         borderRadius={18}
         width={400}
         height={300}
-        slotProps={{
-          barLabel: {
-            style: { fill: "white" },
-          },
-        }}
       />
     </div>
   );

@@ -198,14 +198,23 @@ function GetStats() {
             </h1>
             <hr className="w-[50vw] mx-auto h-1 bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 my-8 border-0" />
             <div>{submissions}</div>
-            <div className="flex  justify-center items-center mt-5">
-              <div>{questionsSolvedTable}</div>
-              <div>{sessionBeats}</div>
+            <div className="flex flex-col items-center my-8">
+              <div className="flex items-center my-8  w-2/3">
+                <hr className="flex-grow border-t-2 border-semiblack mr-4  " />
+                <span className="text-xl font-semibold dark:text-slate-500">
+                  Questions Stats
+                </span>
+                <hr className="flex-grow border-t-2 border-semiblack ml-4" />
+              </div>
+              <div className="flex  justify-center items-center mt-5">
+                <div>{questionsSolvedTable}</div>
+                <div>{sessionBeats}</div>
+              </div>
             </div>
           </div>
           <div>
-            <h1>
-              <h1 className="text-3xl font-bold dark:text-purple text-center">
+            <h1 className="my-20">
+              <h1 className="text-4xl font-bold dark:text-purple text-center">
                 Contest Comparison{" "}
               </h1>
               <hr className="w-[50vw] mx-auto h-1 bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 my-8 border-0" />
