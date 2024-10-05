@@ -14,7 +14,7 @@ export const UserSessionBeats = async (user1: string, user2: string) => {
         "/userProfileUserQuestionProgressV2/" +
         user2
     );
-    console.log(user1Data);
+    // console.log(user1Data);
     let userSessionBeatsObj: userSessionBeatsObjType = {
       user1,
       user2,

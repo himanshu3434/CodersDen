@@ -17,7 +17,9 @@ const config: Config = {
         colorChartV1: "#FDAF7B",
         colorChartV2: "#D4ADFC",
 
-        semiblack: "#363636",
+        semiblack: "#2A2A2A",
+        blackLight: "#3A3A3A",
+        blackLighter: "#4A4A4A",
       },
       backgroundImage: {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",

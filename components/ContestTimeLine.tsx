@@ -3,6 +3,8 @@ import * as React from "react";
 import { ContestTimeLinePropsType, contestType } from "@/types/types";
 // import { LineChart } from "@mui/x-charts";
 import { LineChart } from "@mui/x-charts/LineChart";
+import { useRecoilValue } from "recoil";
+import textColorAtom from "@/atoms/textColorAtom";
 
 // Function to merge timestamps and format them
 function mergeTimestamps(
@@ -80,20 +82,19 @@ export default function ContestTimeLine({
 
   const user1Rating = mapRatings(sortedContestsUser1, xAxisData);
   const user2Rating = mapRatings(sortedContestsUser2, xAxisData);
-  console.log(user1Rating);
-  console.log(xAxisData);
-  console.log(user2Rating);
+  const textColor = useRecoilValue(textColorAtom);
   return (
-    <div>
-      <div className="flex items-center my-8 ">
-        <hr className="flex-grow border-t-2 border-semiblack mr-4  " />
-        <span className="text-xl font-semibold dark:text-slate-500">
+    <div className="flex flex-col items-center">
+      <div className="flex items-center my-6 w-2/3">
+        <hr className="flex-grow border-t-2 dark:border-semiblack mr-4  border-gray-500 " />
+        <span className="text-xl font-semibold dark:text-slate-500 tracking-wider text-blackLighter">
           Timeline
         </span>
-        <hr className="flex-grow border-t-2 border-semiblack ml-4" />
+        <hr className="flex-grow border-t-2 dark:border-semiblack ml-4 border-gray-500 " />
+        {/* < hr className="flex-grow border-t-2 border-semiblack ml-4" /> */}
       </div>
       <LineChart
-        className="dark:bg-semiblack rounded-xl dark:stroke-gray-300 dark:stroke-1"
+        className="dark:bg-semiblack rounded-xl"
         xAxis={[
           {
             data: xAxisData,
@@ -136,6 +137,30 @@ export default function ContestTimeLine({
         ]}
         width={1000}
         height={300}
+        slotProps={{
+          axisLine: {
+            style: {
+              stroke: textColor,
+            },
+          },
+          axisTick: {
+            style: {
+              stroke: textColor,
+            },
+          },
+          axisTickLabel: {
+            style: {
+              fill: textColor,
+              fontSize: "14px",
+            },
+          },
+          legend: {
+            labelStyle: {
+              fontSize: "14px",
+              fill: textColor,
+            },
+          },
+        }}
       />
     </div>
   );

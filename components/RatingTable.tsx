@@ -21,10 +21,10 @@ function RatingTable({ user1, user2, commonContests }: RatingTableUiType) {
   const ratingTable = (
     <div className="">
       <table className="min-w-[70vw]  dark:bg-semiblack   ">
-        <thead className="text-xl bg-blue-400 dark:bg-blue-600 text-white  dark:text-gray-200 h-[7vh] ">
-          <th>Date</th>
-          <th>Common Contest</th>
-          <th className="text-colorChartV1">{user1}</th>
+        <thead className="text-xl bg-[#262626] dark:bg-blue-600 text-white  dark:text-gray-200 h-[7vh] ">
+          <th className="dark:text-white">Date</th>
+          <th className="dark:text-white">Common Contest</th>
+          <th className="text-colorChartV1 ">{user1}</th>
           <th className="text-colorChartV2">{user2}</th>
           <th className="text-green-300">Distance</th>
         </thead>
@@ -115,27 +115,45 @@ function RatingTable({ user1, user2, commonContests }: RatingTableUiType) {
   );
 
   return (
-    <div className=" overflow-x-auto my-20 ">
-      <div className="bg-blue-900  max-w-fit m-3 mx-auto  rounded-xl overflow-hidden  text-white  ">
-        <button
-          className={`p-3 ${option === 0 ? "bg-blue-500 font-bold" : ""}`}
-          onClick={() => setOption(0)}
-        >
-          Rating
-        </button>
-        <button
-          className={`p-3 ${option === 1 ? "bg-blue-500 font-bold" : ""}`}
-          onClick={() => setOption(1)}
-        >
-          Details
-        </button>
+    <div className=" overflow-x-auto  flex items-center flex-col">
+      <div className="w-2/3 flex items-center ">
+        <hr className="flex-grow border-t-2 dark:border-semiblack mr-4  border-gray-500  " />
+        {/* <span className="text-xl font-semibold dark:text-slate-500 tracking-wider">
+          Total Contest
+        </span> */}
+        <div className=" bg-semiblack dark:bg-slate-800  max-w-fit m-3 mx-auto  rounded-3xl overflow-hidden  text-white font-bold tracking-wider  ">
+          <button
+            className={`p-3 ${
+              option === 0
+                ? "bg-[#3A3A3A] dark:bg-semiblack font-semibold "
+                : ""
+            }`}
+            onClick={() => setOption(0)}
+          >
+            Rating
+          </button>
+          <button
+            className={`p-3 ${
+              option === 1 ? "bg-[#3A3A3A] dark:bg-semiblack font-medium" : ""
+            }`}
+            onClick={() => setOption(1)}
+          >
+            Detailed
+          </button>
+        </div>
+        <hr className="flex-grow border-t-2 dark:border-semiblack ml-4 border-gray-500 " />
       </div>
 
       <div className="flex flex-col items-center  shadow-lg rounded-2xl ">
-        <div className="text-3xl mt-10 mb-3 font-bold dark:text-purple">
-          {option === 1 ? "Details " : "Rating "}Table
+        <div className="flex items-center  w-2/3 my-4">
+          <hr className="flex-grow border-t-2 dark:border-semiblack mr-4 border-gray-500   " />
+          <div className="text-xl font-semibold dark:text-slate-500 tracking-wide text-blackLighter">
+            {option === 1 ? "Detailed " : "Rating "}Table
+          </div>
+          <hr className="flex-grow border-t-2 dark:border-semiblack ml-4 border-gray-500   " />
         </div>
-        {option === 1 ? detailsTable : ratingTable}
+
+        <div className="my-3">{option === 1 ? detailsTable : ratingTable}</div>
       </div>
     </div>
   );

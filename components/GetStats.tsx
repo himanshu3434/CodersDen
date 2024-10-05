@@ -1,5 +1,5 @@
 "use client";
-import React, { useState, useCallback, useMemo } from "react";
+import React, { useState, useCallback, useMemo, use, useEffect } from "react";
 import RatingTable from "./RatingTable";
 import { RatingChange } from "@/actions/charts/ratingChange";
 import Button from "./Button";
@@ -40,6 +40,7 @@ function GetStats() {
     setData(undefined);
     setQuestionSolvedTableData(undefined);
     setTypesQuestionSolvedData(undefined);
+    setSessionBeatsData(undefined);
 
     const alldata = await RatingChange(user1, user2);
     const questionSolvedTableObj = await QuestionSolved(user1, user2);
@@ -159,24 +160,27 @@ function GetStats() {
       ),
     [sessionBeatsData]
   );
-
+  useEffect(() => {
+    console.log("rendered");
+  });
   return (
     <div className="flex flex-col justify-center items-center ">
-      <div className="shadow-lg mx-auto flex flex-col items-center w-[30rem] p-5 my-7 dark:bg-semiblack dark:rounded-lg">
+      <div className="shadow-lg mx-auto flex flex-col items-center w-[30rem] p-5 my-7 dark:bg-semiblack rounded-3xl">
         <div className="my-3 flex">
           <input
             type="text"
             onChange={(e) => setUser1(e.target.value)}
             value={user1}
             placeholder="Ex:babu_323"
-            className="mx-2 w-48 h-10 rounded-md p-3 border-b-2 outline-none focus:border-blue-400 dark:bg-semiblack dark:placeholder-slate-500 dark:text-white "
+            className="mx-2 w-48 h-10 rounded-md p-3 border-b-2 outline-none focus:border-semiblack dark:focus:border-white dark:bg-semiblack dark:placeholder-slate-500 dark:text-white "
           />
+          <i className="mt-4 mr-2 text-slate-400s dark:text-white ">vs</i>
           <input
             type="text"
             onChange={(e) => setUser2(e.target.value)}
             value={user2}
             placeholder="Ex:shubham_123"
-            className="w-48 h-10 rounded-md p-3 border-b-2 outline-none focus:border-blue-400 dark:bg-semiblack dark:placeholder-slate-500 dark:text-white"
+            className="w-48 h-10 rounded-md p-3 border-b-2 outline-none focus:border-semiblack dark:focus:border-white dark:bg-semiblack dark:placeholder-slate-500 dark:text-white"
           />
         </div>
         {error && <div className="my-4 text-red-600">User Not Found</div>}
@@ -184,7 +188,7 @@ function GetStats() {
         <Button
           type="button"
           onClick={handlerClick}
-          className="p-3 bg-blue-400 rounded-lg text-white hover:bg-blue-300 shadow-md"
+          className="p-3 pl-8 pr-8  mt-2 bg-[#262626] dark:bg-white rounded-3xl text-white dark:text-black  shadow-md"
         >
           Compare
         </Button>
@@ -193,31 +197,31 @@ function GetStats() {
       {data && (
         <div>
           <div className="text-center dark:text-white ">
-            <h1 className="text-3xl font-bold dark:text-purple">
+            <h1 className="text-3xl font-bold text-blackLight dark:text-purple mt-5  tracking-wide font-mono">
               Basic Comparison{" "}
             </h1>
-            <hr className="w-[50vw] mx-auto h-1 bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 my-8 border-0" />
+            <hr className="w-[70vw] mx-auto h-1 bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 my-4  border-0" />
             <div>{submissions}</div>
-            <div className="flex flex-col items-center my-8">
-              <div className="flex items-center my-8  w-2/3">
-                <hr className="flex-grow border-t-2 border-semiblack mr-4  " />
-                <span className="text-xl font-semibold dark:text-slate-500">
+            <div className="flex flex-col items-center mt-8">
+              <div className="flex items-center mt-6  w-2/3">
+                <hr className="flex-grow border-t-2 dark:border-semiblack mr-4 border-gray-500  " />
+                <span className="text-xl font-semibold dark:text-slate-500 tracking-wider text-blackLighter">
                   Questions Stats
                 </span>
-                <hr className="flex-grow border-t-2 border-semiblack ml-4" />
+                <hr className="flex-grow border-t-2 dark:border-semiblack ml-4 border-gray-500 " />
               </div>
-              <div className="flex  justify-center items-center mt-5">
+              <div className="flex  justify-center items-center mt-2">
                 <div>{questionsSolvedTable}</div>
                 <div>{sessionBeats}</div>
               </div>
             </div>
           </div>
-          <div>
-            <h1 className="my-20">
-              <h1 className="text-4xl font-bold dark:text-purple text-center">
+          <div className="mt-20">
+            <h1 className="">
+              <h1 className="text-3xl font-bold dark:text-purple text-center font-mono text-blackLight">
                 Contest Comparison{" "}
               </h1>
-              <hr className="w-[50vw] mx-auto h-1 bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 my-8 border-0" />
+              <hr className="w-[70vw] mx-auto h-1 bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 mt-5 border-0" />
             </h1>
 
             <div>{contestTimeLine}</div>
@@ -227,8 +231,15 @@ function GetStats() {
             </div>
             <div className="flex justify-center mt-5">{minMaxTable}</div>
           </div>
-
-          {ratingTable}
+          <div className="mt-20">
+            <div className="text-center ">
+              <h1 className="text-3xl font-bold dark:text-purple mt-5  tracking-wide font-mono text-blackLight">
+                Detailed Contest Stats{" "}
+              </h1>
+              <hr className="w-[70vw] mx-auto h-1 bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 my-4  border-0" />
+            </div>
+            <div>{ratingTable}</div>
+          </div>
 
           {typesofQuestions}
         </div>

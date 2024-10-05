@@ -1,6 +1,8 @@
 import * as React from "react";
 import { BarChart } from "@mui/x-charts/BarChart";
 import { tagProblemType, typesQuestionSolvedObjType } from "@/types/types";
+import { useRecoilValue } from "recoil";
+import textColorAtom from "@/atoms/textColorAtom";
 
 const chartSetting = {
   width: 3000,
@@ -48,20 +50,20 @@ export default function TypesofQuestions({
   tagProblemUser2,
 }: typesQuestionSolvedObjType) {
   const dataset = mergeTagsAndPrepareDataset(tagProblemUser1, tagProblemUser2);
-
+  const textColor = useRecoilValue(textColorAtom);
   return (
     <div>
       <h1>
-        <h1 className="text-3xl font-bold dark:text-purple text-center mt-20">
+        <h1 className="text-3xl font-bold dark:text-purple text-center mt-20 tracking-wide font-mono text-blackLighter">
           Type of Questions{" "}
         </h1>
-        <hr className="w-[50vw] mx-auto h-1 bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 my-8 border-0" />
+        <hr className="w-[70vw] mx-auto h-1 bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 my-5 border-0" />
       </h1>
 
-      <div className=" relative overflow-scroll scrollbar-hide w-[60rem] h-[40rem]">
+      <div className=" relative overflow-scroll overflow-y-auto w-[64rem] h-auto scrollbar">
         <div className="">
           <BarChart
-            className="dark:bg-semiblack rounded-xl dark:stroke-gray-300 dark:stroke-1"
+            className="dark:bg-semiblack rounded-xl  mb-1"
             dataset={dataset}
             xAxis={[
               {
@@ -97,6 +99,31 @@ export default function TypesofQuestions({
             borderRadius={15}
             {...chartSetting}
             grid={{ vertical: true }}
+            highlightedItem={null}
+            slotProps={{
+              legend: {
+                labelStyle: {
+                  fontSize: "14px",
+                  fill: textColor,
+                },
+              },
+              axisLine: {
+                style: {
+                  stroke: textColor,
+                },
+              },
+              axisTick: {
+                style: {
+                  stroke: textColor,
+                },
+              },
+              axisTickLabel: {
+                style: {
+                  fill: textColor,
+                  fontSize: "11px",
+                },
+              },
+            }}
           />
         </div>
       </div>

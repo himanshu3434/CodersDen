@@ -1,5 +1,7 @@
+import textColorAtom from "@/atoms/textColorAtom";
 import { userSessionBeatsObjType } from "@/types/types";
 import { BarChart } from "@mui/x-charts/BarChart";
+import { useRecoilValue } from "recoil";
 
 const SessionBeatsTable = ({
   user1,
@@ -12,18 +14,18 @@ const SessionBeatsTable = ({
   const user2SessionBeatsEasy = allSessionBeats.user2SessionBeatsEasy;
   const user2SessionBeatsMedium = allSessionBeats.user2SessionBeatsMedium;
   const user2SessionBeatsHard = allSessionBeats.user2SessionBeatsHard;
-
+  const textColor = useRecoilValue(textColorAtom);
   return (
     <div>
       <div className="flex items-center my-8 ">
-        <hr className="flex-grow border-t-2 border-semiblack mr-4  " />
-        <span className="text-xl font-semibold dark:text-slate-500">
+        <hr className="flex-grow border-t-2 dark:border-semiblack mr-4 border-gray-500  " />
+        <span className="text-lg font-semibold dark:text-slate-500 text-blackLighter">
           Beats %
         </span>
-        <hr className="flex-grow border-t-2 border-semiblack ml-4" />
+        <hr className="flex-grow border-t-2 dark:border-semiblack ml-4 border-gray-500 " />
       </div>
       <BarChart
-        className="dark:bg-semiblack rounded-xl dark:stroke-gray-300 dark:stroke-1"
+        className="dark:bg-semiblack rounded-xl "
         yAxis={[{ label: "Code Beats(%)" }]}
         xAxis={[{ scaleType: "band", data: ["Easy ", "Medium ", "Hard "] }]}
         series={[
@@ -49,6 +51,35 @@ const SessionBeatsTable = ({
         width={400}
         height={300}
         borderRadius={18}
+        slotProps={{
+          legend: {
+            labelStyle: {
+              fontSize: "14px",
+              fill: textColor,
+            },
+          },
+          axisLine: {
+            style: {
+              stroke: textColor,
+            },
+          },
+          axisTick: {
+            style: {
+              stroke: textColor,
+            },
+          },
+          axisTickLabel: {
+            style: {
+              fill: textColor,
+              fontSize: "14px",
+            },
+          },
+          axisLabel: {
+            style: {
+              fill: textColor,
+            },
+          },
+        }}
       />
     </div>
   );
