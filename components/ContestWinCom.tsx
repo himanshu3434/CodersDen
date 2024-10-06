@@ -1,6 +1,7 @@
+import { ContestWinCompare } from "@/actions/charts/contestWinCompare";
 import textColorAtom from "@/atoms/textColorAtom";
 import { pieArcLabelClasses, PieChart } from "@mui/x-charts";
-import React from "react";
+import React, { useEffect } from "react";
 import { useRecoilValue } from "recoil";
 
 function ContestWinCom({
@@ -15,6 +16,15 @@ function ContestWinCom({
   user2Win: number;
 }) {
   const textColor = useRecoilValue(textColorAtom);
+
+  // const getWinData = async () => {
+  //   const windata = await ContestWinCompare(user1, user2);
+  //   console.log("windata", windata);
+  // };
+
+  // useEffect(() => {
+  //   getWinData();
+  // }, []);
   return (
     <div className="my-4">
       <div className="flex items-center my-8 ">

@@ -1,8 +1,9 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { BarChart } from "@mui/x-charts/BarChart";
 import { minMaxTablePropsType } from "@/types/types";
 import { useRecoilValue } from "recoil";
 import textColorAtom from "@/atoms/textColorAtom";
+import { DifferentRatingCompare } from "@/actions/charts/differentRatingCompare";
 
 export default function MinMaxTable({
   user1,
@@ -16,6 +17,16 @@ export default function MinMaxTable({
   const maxRatingUser1 = allRatings.maxRatingUser1;
   const maxRatingUser2 = allRatings.maxRatingUser2;
   const textColor = useRecoilValue(textColorAtom);
+
+  // const getRatingData = async () => {
+  //   const ratingData = await DifferentRatingCompare(user1, user2);
+
+  //   console.log("ratingData ", ratingData);
+  // };
+
+  // useEffect(() => {
+  //   getRatingData();
+  // }, []);
   return (
     <div>
       <div className="flex items-center my-8 ">

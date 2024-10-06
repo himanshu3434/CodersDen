@@ -115,3 +115,29 @@ export type userSessionBeatsObjType = {
   user2: string;
   allSessionBeats: allUserSessionType;
 };
+
+export type contestApiType = {
+  contestAttend: number;
+  contestRating: number;
+  contestGlobalRanking: number;
+  totalParticipants: number;
+  contestTopPercentage: number;
+  contestBadges: any;
+  contestParticipation: [
+    {
+      attended: boolean;
+      rating: number;
+      ranking: number;
+      trendDirection: string;
+      problemsSolved: number;
+      totalProblems: number;
+      finishTimeInSeconds: number;
+      contest: [
+        {
+          title: string;
+          startTime: number;
+        }
+      ];
+    }
+  ];
+};

@@ -5,6 +5,7 @@ import { ContestTimeLinePropsType, contestType } from "@/types/types";
 import { LineChart } from "@mui/x-charts/LineChart";
 import { useRecoilValue } from "recoil";
 import textColorAtom from "@/atoms/textColorAtom";
+import { AllContestUsers } from "@/actions/charts/allContestUsers";
 
 // Function to merge timestamps and format them
 function mergeTimestamps(
@@ -83,6 +84,14 @@ export default function ContestTimeLine({
   const user1Rating = mapRatings(sortedContestsUser1, xAxisData);
   const user2Rating = mapRatings(sortedContestsUser2, xAxisData);
   const textColor = useRecoilValue(textColorAtom);
+  // const getTempRatingTi = async () => {
+  //   const tempContestRatingData = await AllContestUsers(user1, user2);
+  //   console.log("tempContestRatingData", tempContestRatingData);
+  // };
+
+  // React.useEffect(() => {
+  //   getTempRatingTi();
+  // }, []);
   return (
     <div className="flex flex-col items-center">
       <div className="flex items-center my-6 w-2/3">

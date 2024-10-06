@@ -1,6 +1,7 @@
 "use server";
 import axios from "axios";
 import { ratingChangeType, tableDataObjType } from "@/types/types";
+import { cache } from "@/cache/cacheInit";
 
 export const RatingChange = async (
   user1: string,
@@ -13,6 +14,11 @@ export const RatingChange = async (
     const user2Data = await axios.get(
       process.env.Leetcode_Data_URL + "/" + user2 + "/contest"
     );
+    if (cache.get(user1)) {
+      console.log(" exist incache ");
+    } else console.log("not exist in cache ");
+    cache.set(user1, user1Data.data, 1000);
+    cache.set(user2, user2Data.data, 1000);
     let tableDataObj: tableDataObjType = {
       valid: true,
       user1,

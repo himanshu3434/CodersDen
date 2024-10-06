@@ -1,6 +1,7 @@
+import { TotalContest } from "@/actions/charts/totalContest";
 import textColorAtom from "@/atoms/textColorAtom";
 import { pieArcLabelClasses, PieChart } from "@mui/x-charts";
-import React from "react";
+import React, { useEffect } from "react";
 import { useRecoilValue } from "recoil";
 
 function TotalContestPie({
@@ -15,6 +16,13 @@ function TotalContestPie({
   totalContestUser2: number;
 }) {
   const textColor = useRecoilValue(textColorAtom);
+  // const getData = async () => {
+  //   const tableData = await TotalContest(user1, user2);
+  //   console.log("table Data ", tableData);
+  // };
+  // useEffect(() => {
+  //   getData();
+  // }, []);
   return (
     <div className="my-4">
       <div className="flex items-center my-8 ">

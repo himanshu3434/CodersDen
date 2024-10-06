@@ -1,6 +1,7 @@
+import { CommonContest } from "@/actions/charts/commonContest";
 import { RatingTableUiType } from "@/types/types";
 import { formatTime } from "@/utils/formatTime";
-import React from "react";
+import React, { useEffect } from "react";
 
 function RatingTable({ user1, user2, commonContests }: RatingTableUiType) {
   const [option, setOption] = React.useState(0);
@@ -17,7 +18,13 @@ function RatingTable({ user1, user2, commonContests }: RatingTableUiType) {
       timestamp: formattedDate, // Update the timestamp with the formatted date
     };
   });
-
+  // const getcmContest = async () => {
+  //   const tableData = await CommonContest(user1, user2);
+  //   console.log(" common contest data ", tableData);
+  // };
+  // useEffect(() => {
+  //   getcmContest();
+  // }, []);
   const ratingTable = (
     <div className="">
       <table className="min-w-[70vw]  dark:bg-semiblack   ">

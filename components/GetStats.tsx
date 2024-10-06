@@ -18,9 +18,9 @@ import ContestWinCom from "./ContestWinCom";
 import TotalContestPie from "./TotalContestPie";
 import { TypesQuestionSolved } from "@/actions/charts/typesofquestion";
 import TypesofQuestions from "./TypesofQuestions";
-import { Slider } from "@mui/material";
+
 import { UserSessionBeats } from "@/actions/charts/userSessionBeats";
-import { Session } from "inspector/promises";
+
 import SessionBeatsTable from "./SessionBeatsTable";
 
 function GetStats() {
