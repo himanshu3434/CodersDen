@@ -1,5 +1,6 @@
 "use client";
 import useMode from "@/hooks/useMode";
+import { useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
 import { IoMoon, IoSunny } from "react-icons/io5";
 
@@ -21,6 +22,14 @@ function NavBar() {
   //     currentMode === "dark" ? "light" : "dark"
   //   );
   // };
+
+  const router = useRouter();
+  const handleCompareClick = () => {
+    router.push("/");
+  };
+  const handleAboutClick = () => {
+    router.push("/about");
+  };
   const { mode, toggleMode } = useMode();
 
   return (
@@ -34,10 +43,16 @@ function NavBar() {
           <button onClick={toggleMode} className=" px-3 rounded-b-lg  ">
             {mode === "dark" ? <IoSunny /> : <IoMoon />}
           </button>
-          <button className="hover:bg-red-400 px-3 rounded-b-lg hover:text-white">
+          <button
+            onClick={handleCompareClick}
+            className="hover:bg-red-400 px-3 rounded-b-lg hover:text-white"
+          >
             Compare
           </button>
-          <button className="hover:bg-red-400 px-3 rounded-b-lg hover:text-white ">
+          <button
+            onClick={handleAboutClick}
+            className="hover:bg-red-400 px-3 rounded-b-lg hover:text-white "
+          >
             About
           </button>
         </div>
