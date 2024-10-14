@@ -1,30 +1,42 @@
 import { CommonContest } from "@/actions/charts/commonContest";
-import { RatingTableUiType } from "@/types/types";
+import {
+  ratingChangeType,
+  RatingTableUiType,
+  userNameComponentType,
+} from "@/types/types";
 import { formatTime } from "@/utils/formatTime";
-import React, { useEffect } from "react";
-
-function RatingTable({ user1, user2, commonContests }: RatingTableUiType) {
+import React, { useEffect, useState } from "react";
+interface RatingChangeDisplayType extends ratingChangeType {
+  timestampString: string;
+}
+function RatingTable({ user1, user2 }: userNameComponentType) {
   const [option, setOption] = React.useState(0);
-  const updatedCommonContests = commonContests.map((contest) => {
-    const date = new Date(contest.timestamp * 1000); // Convert Unix timestamp to milliseconds
-    const options: Intl.DateTimeFormatOptions = {
-      year: "numeric",
-      month: "short",
-      day: "numeric",
-    };
-    const formattedDate = date.toLocaleDateString("en-US", options); // Format date
-    return {
-      ...contest,
-      timestamp: formattedDate, // Update the timestamp with the formatted date
-    };
-  });
-  // const getcmContest = async () => {
-  //   const tableData = await CommonContest(user1, user2);
-  //   console.log(" common contest data ", tableData);
-  // };
-  // useEffect(() => {
-  //   getcmContest();
-  // }, []);
+  const [updatedCommonContests, setUpdatedCommonContests] = useState<
+    RatingChangeDisplayType[]
+  >([]);
+
+  const getCommonContest = async () => {
+    const tableData = (await CommonContest(user1, user2)) as ratingChangeType[];
+    console.log(" common contest data ", tableData);
+    const updatedCommonContestsData = tableData.map((contest) => {
+      const date = new Date(contest.timestamp * 1000); // Convert Unix timestamp to milliseconds
+      const options: Intl.DateTimeFormatOptions = {
+        year: "numeric",
+        month: "short",
+        day: "numeric",
+      };
+      const formattedDate = date.toLocaleDateString("en-US", options); // Format date
+      return {
+        ...contest,
+        timestampString: formattedDate, // Update the timestamp with the formatted date
+      };
+    });
+
+    setUpdatedCommonContests(updatedCommonContestsData);
+  };
+  useEffect(() => {
+    getCommonContest();
+  }, []);
   const ratingTable = (
     <div className="">
       <table className="min-w-[70vw]  dark:bg-semiblack   ">
@@ -39,7 +51,7 @@ function RatingTable({ user1, user2, commonContests }: RatingTableUiType) {
           {updatedCommonContests.map((contest, index) => (
             <tr key={index} className=" hover:bg-gray-300 dark:hover:bg-black ">
               <td className="py-2 text-black dark:text-gray-300">
-                {contest.timestamp}
+                {contest.timestampString}
               </td>
               <td className="py-2 text-black dark:text-gray-300">
                 {contest.title}

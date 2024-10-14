@@ -1,4 +1,4 @@
-export type ratingChangeType = {
+export interface ratingChangeType {
   ranking1: string;
   ranking2: string;
   problemsSolved1: string;
@@ -9,7 +9,8 @@ export type ratingChangeType = {
   finishTimeInSeconds2: number;
   title: string;
   timestamp: number;
-};
+}
+
 export type minMaxtype = {
   maxRatingUser1: number;
   maxRatingUser2: number;
@@ -140,4 +141,9 @@ export type contestApiType = {
       ];
     }
   ];
+};
+
+export type userNameComponentType = {
+  user1: string;
+  user2: string;
 };

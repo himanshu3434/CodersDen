@@ -1,20 +1,37 @@
+import { UserSessionBeats } from "@/actions/charts/userSessionBeats";
 import textColorAtom from "@/atoms/textColorAtom";
-import { userSessionBeatsObjType } from "@/types/types";
+import {
+  allUserSessionType,
+  userNameComponentType,
+  userSessionBeatsObjType,
+} from "@/types/types";
 import { BarChart } from "@mui/x-charts/BarChart";
+import { useEffect, useState } from "react";
 import { useRecoilValue } from "recoil";
 
-const SessionBeatsTable = ({
-  user1,
-  user2,
-  allSessionBeats,
-}: userSessionBeatsObjType) => {
-  const user1SessionBeatsEasy = allSessionBeats.user1SessionBeatsEasy;
-  const user1SessionBeatsMedium = allSessionBeats.user1SessionBeatsMedium;
-  const user1SessionBeatsHard = allSessionBeats.user1SessionBeatsHard;
-  const user2SessionBeatsEasy = allSessionBeats.user2SessionBeatsEasy;
-  const user2SessionBeatsMedium = allSessionBeats.user2SessionBeatsMedium;
-  const user2SessionBeatsHard = allSessionBeats.user2SessionBeatsHard;
+const SessionBeatsTable = ({ user1, user2 }: userNameComponentType) => {
+  const [allSessionBeats, setAllSessionBeats] = useState<allUserSessionType>({
+    user1SessionBeatsEasy: 0,
+    user1SessionBeatsMedium: 0,
+    user1SessionBeatsHard: 0,
+    user2SessionBeatsEasy: 0,
+    user2SessionBeatsMedium: 0,
+    user2SessionBeatsHard: 0,
+  });
+
   const textColor = useRecoilValue(textColorAtom);
+
+  const getSessionBeatData = async () => {
+    const sessionData = (await UserSessionBeats(
+      user1,
+      user2
+    )) as userSessionBeatsObjType;
+
+    setAllSessionBeats(sessionData.allSessionBeats);
+  };
+  useEffect(() => {
+    getSessionBeatData();
+  }, []);
   return (
     <div>
       <div className="flex items-center my-8 ">
@@ -32,18 +49,18 @@ const SessionBeatsTable = ({
           {
             label: user1,
             data: [
-              user1SessionBeatsEasy,
-              user1SessionBeatsMedium,
-              user1SessionBeatsHard,
+              allSessionBeats.user1SessionBeatsEasy,
+              allSessionBeats.user1SessionBeatsMedium,
+              allSessionBeats.user1SessionBeatsHard,
             ],
             color: "#FDAF7B",
           },
           {
             label: user2,
             data: [
-              user2SessionBeatsEasy,
-              user2SessionBeatsMedium,
-              user2SessionBeatsHard,
+              allSessionBeats.user2SessionBeatsEasy,
+              allSessionBeats.user2SessionBeatsMedium,
+              allSessionBeats.user2SessionBeatsHard,
             ],
             color: "#D4ADFC",
           },

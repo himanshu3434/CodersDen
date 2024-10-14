@@ -1,6 +1,10 @@
-import * as React from "react";
+import React, { useState } from "react";
 
-import { ContestTimeLinePropsType, contestType } from "@/types/types";
+import {
+  ContestTimeLinePropsType,
+  contestType,
+  userNameComponentType,
+} from "@/types/types";
 // import { LineChart } from "@mui/x-charts";
 import { LineChart } from "@mui/x-charts/LineChart";
 import { useRecoilValue } from "recoil";
@@ -44,54 +48,72 @@ function mergeTimestamps(
 export default function ContestTimeLine({
   user1,
   user2,
-  allContestsUser1,
-  allContestsUser2,
-}: ContestTimeLinePropsType) {
+}: userNameComponentType) {
   //   console.log("e1e");
-  const xAxisData = mergeTimestamps(allContestsUser1, allContestsUser2);
-  // console.log(xAxisData.length);
-  const sortedContestsUser1 = allContestsUser1.sort(
-    (a, b) => a.timestamp - b.timestamp
-  );
-  const sortedContestsUser2 = allContestsUser2.sort(
-    (a, b) => a.timestamp - b.timestamp
-  );
-  const mapRatings = (contests: contestType[], xAxisData: string[]) => {
-    const ratings: (number | null)[] = [];
+  const [xAxisData, setXAxisData] = useState<string[]>([]);
+  const [user1Rating, setUser1Rating] = useState<(number | null)[]>([]);
+  const [user2Rating, setUser2Rating] = useState<(number | null)[]>([]);
 
-    xAxisData.forEach((formattedDate) => {
-      const contest = contests.find((contest) => {
-        const date = new Date(contest.timestamp * 1000);
-        const options: Intl.DateTimeFormatOptions = {
-          year: "numeric",
-          month: "short",
-          day: "numeric",
-        };
-        const formattedContestDate = date.toLocaleDateString("en-US", options);
-        return formattedDate === formattedContestDate;
+  const textColor = useRecoilValue(textColorAtom);
+  const getRatingData = async () => {
+    const tempContestRatingData = await AllContestUsers(user1, user2);
+    console.log("tempContestRatingData", tempContestRatingData);
+
+    const allContestsUser1 =
+      tempContestRatingData.allContestsUser1 as contestType[];
+    const allContestsUser2 =
+      tempContestRatingData.allContestsUser2 as contestType[];
+
+    const xAxisDataCompute = mergeTimestamps(
+      allContestsUser1,
+      allContestsUser2
+    );
+    setXAxisData(xAxisDataCompute);
+    // console.log(xAxisData.length);
+    const sortedContestsUser1 = allContestsUser1.sort(
+      (a, b) => a.timestamp - b.timestamp
+    );
+    const sortedContestsUser2 = allContestsUser2.sort(
+      (a, b) => a.timestamp - b.timestamp
+    );
+    const mapRatings = (contests: contestType[], xAxisData: string[]) => {
+      const ratings: (number | null)[] = [];
+
+      xAxisData.forEach((formattedDate) => {
+        const contest = contests.find((contest) => {
+          const date = new Date(contest.timestamp * 1000);
+          const options: Intl.DateTimeFormatOptions = {
+            year: "numeric",
+            month: "short",
+            day: "numeric",
+          };
+          const formattedContestDate = date.toLocaleDateString(
+            "en-US",
+            options
+          );
+          return formattedDate === formattedContestDate;
+        });
+
+        if (contest) {
+          ratings.push(contest.rating);
+        } else {
+          ratings.push(null);
+        }
       });
 
-      if (contest) {
-        ratings.push(contest.rating);
-      } else {
-        ratings.push(null);
-      }
-    });
+      return ratings;
+    };
 
-    return ratings;
+    const user1RatingData = mapRatings(sortedContestsUser1, xAxisDataCompute);
+    const user2RatingData = mapRatings(sortedContestsUser2, xAxisDataCompute);
+
+    setUser1Rating(user1RatingData);
+    setUser2Rating(user2RatingData);
   };
 
-  const user1Rating = mapRatings(sortedContestsUser1, xAxisData);
-  const user2Rating = mapRatings(sortedContestsUser2, xAxisData);
-  const textColor = useRecoilValue(textColorAtom);
-  // const getTempRatingTi = async () => {
-  //   const tempContestRatingData = await AllContestUsers(user1, user2);
-  //   console.log("tempContestRatingData", tempContestRatingData);
-  // };
-
-  // React.useEffect(() => {
-  //   getTempRatingTi();
-  // }, []);
+  React.useEffect(() => {
+    getRatingData();
+  }, []);
   return (
     <div className="flex flex-col items-center">
       <div className="flex items-center my-6 w-2/3">

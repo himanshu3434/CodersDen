@@ -1,32 +1,35 @@
 import React, { useEffect, useState } from "react";
 import { BarChart } from "@mui/x-charts/BarChart";
-import { minMaxTablePropsType } from "@/types/types";
+import {
+  minMaxTablePropsType,
+  minMaxtype,
+  userNameComponentType,
+} from "@/types/types";
 import { useRecoilValue } from "recoil";
 import textColorAtom from "@/atoms/textColorAtom";
 import { DifferentRatingCompare } from "@/actions/charts/differentRatingCompare";
 
-export default function MinMaxTable({
-  user1,
-  user2,
-  allRatings,
-}: minMaxTablePropsType) {
-  const minRatingUser1 = allRatings.minRatingUser1;
-  const minRatingUser2 = allRatings.minRatingUser2;
-  const currentRatingUser1 = allRatings.currentRatingUser1;
-  const currentRatingUser2 = allRatings.currentRatingUser2;
-  const maxRatingUser1 = allRatings.maxRatingUser1;
-  const maxRatingUser2 = allRatings.maxRatingUser2;
+export default function MinMaxTable({ user1, user2 }: userNameComponentType) {
+  const [allRatings, setAllRatings] = useState<minMaxtype>({
+    minRatingUser1: 0,
+    minRatingUser2: 0,
+    currentRatingUser1: 0,
+    currentRatingUser2: 0,
+    maxRatingUser1: 0,
+    maxRatingUser2: 0,
+  });
+
   const textColor = useRecoilValue(textColorAtom);
 
-  // const getRatingData = async () => {
-  //   const ratingData = await DifferentRatingCompare(user1, user2);
+  const getRatingData = async () => {
+    const ratingData = await DifferentRatingCompare(user1, user2);
+    setAllRatings(ratingData);
+    console.log("ratingData ", ratingData);
+  };
 
-  //   console.log("ratingData ", ratingData);
-  // };
-
-  // useEffect(() => {
-  //   getRatingData();
-  // }, []);
+  useEffect(() => {
+    getRatingData();
+  }, []);
   return (
     <div>
       <div className="flex items-center my-8 ">
@@ -42,13 +45,21 @@ export default function MinMaxTable({
         series={[
           {
             label: user1,
-            data: [minRatingUser1, currentRatingUser1, maxRatingUser1],
+            data: [
+              allRatings.minRatingUser1,
+              allRatings.currentRatingUser1,
+              allRatings.maxRatingUser1,
+            ],
             color: "#FDAF7B",
           },
           {
             label: user2,
 
-            data: [minRatingUser2, currentRatingUser2, maxRatingUser2],
+            data: [
+              allRatings.minRatingUser2,
+              allRatings.currentRatingUser2,
+              allRatings.maxRatingUser2,
+            ],
             color: "#D4ADFC",
           },
         ]}

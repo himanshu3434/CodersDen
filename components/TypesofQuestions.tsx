@@ -1,9 +1,18 @@
 import * as React from "react";
 import { BarChart } from "@mui/x-charts/BarChart";
-import { tagProblemType, typesQuestionSolvedObjType } from "@/types/types";
+import {
+  tagProblemType,
+  typesQuestionSolvedObjType,
+  userNameComponentType,
+} from "@/types/types";
 import { useRecoilValue } from "recoil";
 import textColorAtom from "@/atoms/textColorAtom";
-
+import { TypesQuestionSolved } from "@/actions/charts/typesofquestion";
+type dataSetType = {
+  tagName: string;
+  user1: number;
+  user2: number;
+};
 const chartSetting = {
   width: 3000,
   height: 600,
@@ -46,11 +55,26 @@ function mergeTagsAndPrepareDataset(
 export default function TypesofQuestions({
   user1,
   user2,
-  tagProblemUser1,
-  tagProblemUser2,
-}: typesQuestionSolvedObjType) {
-  const dataset = mergeTagsAndPrepareDataset(tagProblemUser1, tagProblemUser2);
+}: userNameComponentType) {
+  const [dataSet, setDataSet] = React.useState<dataSetType[]>([]);
   const textColor = useRecoilValue(textColorAtom);
+
+  const getTypesQuestionSolvedData = async () => {
+    const typesQuestionSolvedObj = (await TypesQuestionSolved(
+      user1,
+      user2
+    )) as typesQuestionSolvedObjType;
+
+    console.log("question type of char t compot  ", typesQuestionSolvedObj);
+    const dataSetArray = mergeTagsAndPrepareDataset(
+      typesQuestionSolvedObj.tagProblemUser1,
+      typesQuestionSolvedObj.tagProblemUser2
+    );
+    setDataSet(dataSetArray);
+  };
+  React.useEffect(() => {
+    getTypesQuestionSolvedData();
+  }, []);
   return (
     <div>
       <h1>
@@ -64,7 +88,7 @@ export default function TypesofQuestions({
         <div className="">
           <BarChart
             className="dark:bg-semiblack rounded-xl  mb-1"
-            dataset={dataset}
+            dataset={dataSet}
             xAxis={[
               {
                 scaleType: "band",

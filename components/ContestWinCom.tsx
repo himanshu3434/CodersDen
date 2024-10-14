@@ -1,30 +1,27 @@
 import { ContestWinCompare } from "@/actions/charts/contestWinCompare";
 import textColorAtom from "@/atoms/textColorAtom";
+import { userNameComponentType } from "@/types/types";
 import { pieArcLabelClasses, PieChart } from "@mui/x-charts";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useRecoilValue } from "recoil";
 
-function ContestWinCom({
-  user1,
-  user2,
-  user1Win,
-  user2Win,
-}: {
-  user1: string;
-  user2: string;
-  user1Win: number;
-  user2Win: number;
-}) {
+function ContestWinCom({ user1, user2 }: userNameComponentType) {
   const textColor = useRecoilValue(textColorAtom);
+  const [user1WinData, setUser1WinData] = useState(0);
+  const [user2WinData, setUser2WinData] = useState(0);
+  const getWinData = async () => {
+    const windata = (await ContestWinCompare(user1, user2)) as {
+      user1Win: number;
+      user2Win: number;
+    };
+    console.log("windata", windata);
+    setUser1WinData(windata.user1Win);
+    setUser2WinData(windata.user2Win);
+  };
 
-  // const getWinData = async () => {
-  //   const windata = await ContestWinCompare(user1, user2);
-  //   console.log("windata", windata);
-  // };
-
-  // useEffect(() => {
-  //   getWinData();
-  // }, []);
+  useEffect(() => {
+    getWinData();
+  }, []);
   return (
     <div className="my-4">
       <div className="flex items-center my-8 ">
@@ -44,8 +41,8 @@ function ContestWinCom({
           series={[
             {
               data: [
-                { id: 1, value: user2Win, label: user2 },
-                { id: 0, value: user1Win, label: user1 },
+                { id: 1, value: user2WinData, label: user2 },
+                { id: 0, value: user1WinData, label: user1 },
               ],
               arcLabel: (params) => params.value + " wins",
               highlightScope: { fade: "global", highlight: "item" },

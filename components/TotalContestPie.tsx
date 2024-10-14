@@ -1,28 +1,23 @@
 import { TotalContest } from "@/actions/charts/totalContest";
 import textColorAtom from "@/atoms/textColorAtom";
+import { userNameComponentType } from "@/types/types";
 import { pieArcLabelClasses, PieChart } from "@mui/x-charts";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useRecoilValue } from "recoil";
 
-function TotalContestPie({
-  user1,
-  user2,
-  totalContestUser1,
-  totalContestUser2,
-}: {
-  user1: string;
-  user2: string;
-  totalContestUser1: number;
-  totalContestUser2: number;
-}) {
+function TotalContestPie({ user1, user2 }: userNameComponentType) {
   const textColor = useRecoilValue(textColorAtom);
-  // const getData = async () => {
-  //   const tableData = await TotalContest(user1, user2);
-  //   console.log("table Data ", tableData);
-  // };
-  // useEffect(() => {
-  //   getData();
-  // }, []);
+  const [totalContestUser1Data, setTotalContestUser1Data] = useState(0);
+  const [totalContestUser2Data, setTotalContestUser2Data] = useState(0);
+  const getData = async () => {
+    const tableData = await TotalContest(user1, user2);
+    console.log("table Data ", tableData);
+    setTotalContestUser1Data(tableData.totalContestUser1);
+    setTotalContestUser2Data(tableData.totalContestUser2);
+  };
+  useEffect(() => {
+    getData();
+  }, []);
   return (
     <div className="my-4">
       <div className="flex items-center my-8 ">
@@ -39,8 +34,8 @@ function TotalContestPie({
           series={[
             {
               data: [
-                { id: 1, value: totalContestUser2, label: user2 },
-                { id: 0, value: totalContestUser1, label: user1 },
+                { id: 1, value: totalContestUser2Data, label: user2 },
+                { id: 0, value: totalContestUser1Data, label: user1 },
               ],
               arcLabel: (params) => params.value + "",
               highlightScope: { fade: "global", highlight: "item" },
