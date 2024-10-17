@@ -11,8 +11,6 @@ export const TypesQuestionSolved = async (user1: string, user2: string) => {
     const user2Data = await axios.get(
       process.env.Leetcode_Data_URL + "/skillstats/" + user2
     );
-    //   console.log(user1Data.data);
-    //   console.log(user2Data.data.data);
 
     let typesQuestionSolvedObj: typesQuestionSolvedObjType = {
       user1,

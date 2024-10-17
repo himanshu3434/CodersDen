@@ -1,12 +1,12 @@
 "use client";
 import textColorAtom from "@/atoms/textColorAtom";
 import { useState, useEffect } from "react";
-import { useRecoilState } from "recoil";
+import { useSetRecoilState } from "recoil";
 
 const useMode = () => {
   const [mode, setMode] = useState("dark");
 
-  const [textColor, setTextColor] = useRecoilState(textColorAtom);
+  const setTextColor = useSetRecoilState(textColorAtom);
 
   useEffect(() => {
     const preferedMode = window.localStorage.getItem("mode");
@@ -34,7 +34,6 @@ const useMode = () => {
     );
     setTextColor(currentMode === "dark" ? "white" : "black");
   };
-  // console.log(textColor);
   return { mode, toggleMode };
 };
 

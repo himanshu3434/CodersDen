@@ -6,7 +6,6 @@ export const CommonContest = async (
   user1: string,
   user2: string
 ): Promise<any> => {
-  console.log("CommonContest", user1, user2);
   const contestData = await getContestData(user1, user2);
 
   const user1Data = contestData.user1Data;

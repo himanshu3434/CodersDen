@@ -1,7 +1,7 @@
 import { TotalContest } from "@/actions/charts/totalContest";
 import textColorAtom from "@/atoms/textColorAtom";
 import { userNameComponentType } from "@/types/types";
-import { pieArcLabelClasses, PieChart } from "@mui/x-charts";
+import { PieChart } from "@mui/x-charts";
 import React, { useEffect, useState } from "react";
 import { useRecoilValue } from "recoil";
 
@@ -11,7 +11,6 @@ function TotalContestPie({ user1, user2 }: userNameComponentType) {
   const [totalContestUser2Data, setTotalContestUser2Data] = useState(0);
   const getData = async () => {
     const tableData = await TotalContest(user1, user2);
-    console.log("table Data ", tableData);
     setTotalContestUser1Data(tableData.totalContestUser1);
     setTotalContestUser2Data(tableData.totalContestUser2);
   };
@@ -29,21 +28,31 @@ function TotalContestPie({ user1, user2 }: userNameComponentType) {
       </div>
       <div className="dark:bg-semiblack  pt-5 pb-5 rounded-xl">
         <PieChart
-          className=""
           colors={["#D4ADFC", "#FDAF7B"]} // Use palette
+          margin={{ top: 40, left: 90 }}
           series={[
             {
               data: [
-                { id: 1, value: totalContestUser2Data, label: user2 },
-                { id: 0, value: totalContestUser1Data, label: user1 },
+                {
+                  id: 1,
+                  value: totalContestUser2Data,
+                  label: user2,
+                },
+                {
+                  id: 0,
+                  value: totalContestUser1Data,
+                  label: user1,
+                },
               ],
-              arcLabel: (params) => params.value + "",
+              arcLabel: (params) => {
+                return params.value == 0 ? "" : params.value + "";
+              },
               highlightScope: { fade: "global", highlight: "item" },
               faded: { innerRadius: 30, additionalRadius: -30, color: "gray" },
             },
           ]}
           width={400}
-          height={200}
+          height={280}
           slotProps={{
             axisLine: {
               style: {
@@ -62,6 +71,9 @@ function TotalContestPie({ user1, user2 }: userNameComponentType) {
               },
             },
             legend: {
+              direction: "row",
+              position: { vertical: "top", horizontal: "middle" },
+              padding: 0,
               labelStyle: {
                 fontSize: "14px",
                 fill: textColor,

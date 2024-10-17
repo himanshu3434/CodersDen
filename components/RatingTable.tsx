@@ -1,9 +1,5 @@
 import { CommonContest } from "@/actions/charts/commonContest";
-import {
-  ratingChangeType,
-  RatingTableUiType,
-  userNameComponentType,
-} from "@/types/types";
+import { ratingChangeType, userNameComponentType } from "@/types/types";
 import { formatTime } from "@/utils/formatTime";
 import React, { useEffect, useState } from "react";
 interface RatingChangeDisplayType extends ratingChangeType {
@@ -17,7 +13,6 @@ function RatingTable({ user1, user2 }: userNameComponentType) {
 
   const getCommonContest = async () => {
     const tableData = (await CommonContest(user1, user2)) as ratingChangeType[];
-    console.log(" common contest data ", tableData);
     const updatedCommonContestsData = tableData.map((contest) => {
       const date = new Date(contest.timestamp * 1000); // Convert Unix timestamp to milliseconds
       const options: Intl.DateTimeFormatOptions = {
@@ -75,8 +70,8 @@ function RatingTable({ user1, user2 }: userNameComponentType) {
   );
 
   const detailsTable = (
-    <div className="overflow-x-auto">
-      <table className="min-w-[70vw] border-collapse border border-gray-200">
+    <div className="overflow-x-auto rounded-2xl">
+      <table className="min-w-[70vw] border-collapse ">
         <thead className="text-xl bg-blue-400 dark:bg-blue-600 dark:text-gray-200 text-white h-[7vh]">
           <tr>
             <th>Date</th>
@@ -106,20 +101,20 @@ function RatingTable({ user1, user2 }: userNameComponentType) {
 
             return (
               <tr key={index} className="hover:bg-gray-300 dark:hover:bg-black">
-                <td className="py-2 text-black dark:text-gray-300 border border-gray-200">
-                  {contest.timestamp}
+                <td className="py-2 text-black dark:text-gray-300">
+                  {contest.timestampString}
                 </td>
-                <td className="py-2 text-black dark:text-gray-300 border border-gray-200">
+                <td className="py-2 text-black dark:text-gray-300 ">
                   {contest.title}
                 </td>
-                <td className="text-colorChartV1 border border-gray-200 ">
+                <td className="text-colorChartV1  ">
                   <div className=" flex justify-between ">
                     <td className="w-1/2 ">{contest.problemsSolved1}</td>
                     <td className=" w-1/2 "> {time1}</td>
                   </div>
                 </td>
 
-                <td className="text-colorChartV2 border border-gray-200 ">
+                <td className="text-colorChartV2  ">
                   <div className=" flex justify-between ">
                     <td className="w-1/2 ">{contest.problemsSolved2}</td>
                     <td className=" w-1/2  "> {time2}</td>
@@ -137,9 +132,7 @@ function RatingTable({ user1, user2 }: userNameComponentType) {
     <div className=" overflow-x-auto  flex items-center flex-col">
       <div className="w-2/3 flex items-center ">
         <hr className="flex-grow border-t-2 dark:border-semiblack mr-4  border-gray-500  " />
-        {/* <span className="text-xl font-semibold dark:text-slate-500 tracking-wider">
-          Total Contest
-        </span> */}
+
         <div className=" bg-semiblack dark:bg-slate-800  max-w-fit m-3 mx-auto  rounded-3xl overflow-hidden  text-white font-bold tracking-wider  ">
           <button
             className={`p-3 ${

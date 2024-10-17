@@ -1,10 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { BarChart } from "@mui/x-charts/BarChart";
-import {
-  allQuestionsSolvedType,
-  questionSolvedTableObjType,
-  userNameComponentType,
-} from "@/types/types";
+import { allQuestionsSolvedType, userNameComponentType } from "@/types/types";
 import textColorAtom from "@/atoms/textColorAtom";
 import { useRecoilValue } from "recoil";
 import { QuestionSolved } from "@/actions/charts/questionSolved";

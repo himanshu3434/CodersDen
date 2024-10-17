@@ -7,15 +7,12 @@ export const QuestionSolved = async (
   user2: string
 ): Promise<any> => {
   try {
-    // console.log("ssdasd" + user1 + " " + user2);
-    // console.log(process.env.Leetcode_Data_URL + "/" + user1 + "/solved");
     const user1Data = await axios.get(
       process.env.Leetcode_Data_URL + "/" + user1 + "/solved"
     );
     const user2Data = await axios.get(
       process.env.Leetcode_Data_URL + "/" + user2 + "/solved"
     );
-    // console.log(user1Data.data);
 
     let questionSolvedTableObj: questionSolvedTableObjType = {
       user1,
@@ -47,7 +44,6 @@ export const QuestionSolved = async (
     questionSolvedTableObj.allSolvedQuestions.hardSolvedUser2 =
       user2Data.data.hardSolved;
 
-    // console.log(questionSolvedTableObj);
     return questionSolvedTableObj;
   } catch (error) {
     console.log(error);

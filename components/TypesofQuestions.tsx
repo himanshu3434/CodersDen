@@ -14,7 +14,7 @@ type dataSetType = {
   user2: number;
 };
 const chartSetting = {
-  width: 3000,
+  width: 3320,
   height: 600,
 };
 const valueFormatter = (value: number | null) => `${value}`;
@@ -65,7 +65,6 @@ export default function TypesofQuestions({
       user2
     )) as typesQuestionSolvedObjType;
 
-    console.log("question type of char t compot  ", typesQuestionSolvedObj);
     const dataSetArray = mergeTagsAndPrepareDataset(
       typesQuestionSolvedObj.tagProblemUser1,
       typesQuestionSolvedObj.tagProblemUser2
@@ -96,11 +95,6 @@ export default function TypesofQuestions({
                 valueFormatter: (value: string) => {
                   return value.split(/[\s-]+/).join("\n");
                 },
-                tickLabelStyle: {
-                  fontSize: 11,
-                  width: 1,
-                  padding: 2,
-                },
               },
             ]}
             series={[
@@ -119,7 +113,6 @@ export default function TypesofQuestions({
                 // DFCCFB  D0BFFF D4ADFC   BEADFA
               },
             ]}
-            layout="vertical"
             borderRadius={15}
             {...chartSetting}
             grid={{ vertical: true }}

@@ -1,28 +1,10 @@
 "use client";
 import useMode from "@/hooks/useMode";
 import { useRouter } from "next/navigation";
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { IoMoon, IoSunny } from "react-icons/io5";
 
 function NavBar() {
-  // const [mode, setMode] = useState("dark");
-  // useEffect(() => {
-  //   const preferedMode = window.localStorage.getItem("mode");
-
-  //   window.document.documentElement.classList.add(preferedMode ?? mode);
-  //   if (preferedMode) setMode(preferedMode);
-  // }, []);
-  // const toggleModeHandler = () => {
-  //   window.localStorage.setItem("mode", mode === "dark" ? "light" : "dark");
-
-  //   const currentMode = mode === "dark" ? "light" : "dark";
-  //   setMode(currentMode);
-  //   window.document.documentElement.classList.add(currentMode);
-  //   window.document.documentElement.classList.remove(
-  //     currentMode === "dark" ? "light" : "dark"
-  //   );
-  // };
-
   const router = useRouter();
   const handleCompareClick = () => {
     router.push("/");

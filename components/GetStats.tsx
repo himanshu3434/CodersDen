@@ -92,9 +92,7 @@ function GetStats() {
     () => <SessionBeatsTable user1={userName1} user2={userName2} />,
     [userName1, userName2]
   );
-  useEffect(() => {
-    console.log("rendered");
-  });
+
   return (
     <div className="flex flex-col justify-center items-center ">
       <div className="shadow-lg mx-auto flex flex-col items-center w-[30rem] p-5 my-7 dark:bg-semiblack rounded-3xl">

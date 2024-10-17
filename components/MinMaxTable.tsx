@@ -1,10 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { BarChart } from "@mui/x-charts/BarChart";
-import {
-  minMaxTablePropsType,
-  minMaxtype,
-  userNameComponentType,
-} from "@/types/types";
+import { minMaxtype, userNameComponentType } from "@/types/types";
 import { useRecoilValue } from "recoil";
 import textColorAtom from "@/atoms/textColorAtom";
 import { DifferentRatingCompare } from "@/actions/charts/differentRatingCompare";
@@ -24,7 +20,6 @@ export default function MinMaxTable({ user1, user2 }: userNameComponentType) {
   const getRatingData = async () => {
     const ratingData = await DifferentRatingCompare(user1, user2);
     setAllRatings(ratingData);
-    console.log("ratingData ", ratingData);
   };
 
   useEffect(() => {

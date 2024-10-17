@@ -1,6 +1,6 @@
 "use server";
 import { userSessionBeatsObjType } from "@/types/types";
-import axios, { all } from "axios";
+import axios from "axios";
 
 export const UserSessionBeats = async (user1: string, user2: string) => {
   try {
@@ -14,7 +14,6 @@ export const UserSessionBeats = async (user1: string, user2: string) => {
         "/userProfileUserQuestionProgressV2/" +
         user2
     );
-    // console.log(user1Data);
     let userSessionBeatsObj: userSessionBeatsObjType = {
       user1,
       user2,

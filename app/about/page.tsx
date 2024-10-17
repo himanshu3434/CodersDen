@@ -30,7 +30,7 @@ const About = () => {
         </Link>
         <span className="text-purple-600"> & </span>
         <Link href="https://himanshuyadav.vercel.app/" target="_blank">
-          <span className="text-purple-600 underline">Himashu </span>
+          <span className="text-purple-600 underline">Himanshu </span>
         </Link>{" "}
         ~
       </div>

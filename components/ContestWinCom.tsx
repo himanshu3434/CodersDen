@@ -1,7 +1,7 @@
 import { ContestWinCompare } from "@/actions/charts/contestWinCompare";
 import textColorAtom from "@/atoms/textColorAtom";
 import { userNameComponentType } from "@/types/types";
-import { pieArcLabelClasses, PieChart } from "@mui/x-charts";
+import { PieChart } from "@mui/x-charts";
 import React, { useEffect, useState } from "react";
 import { useRecoilValue } from "recoil";
 
@@ -14,7 +14,6 @@ function ContestWinCom({ user1, user2 }: userNameComponentType) {
       user1Win: number;
       user2Win: number;
     };
-    console.log("windata", windata);
     setUser1WinData(windata.user1Win);
     setUser2WinData(windata.user2Win);
   };
@@ -28,15 +27,12 @@ function ContestWinCom({ user1, user2 }: userNameComponentType) {
         <hr className="flex-grow border-t-2 dark:border-semiblack mr-4  border-gray-500 " />
         <span className="text-xl font-semibold dark:text-slate-500 tracking-wider text-blackLighter">
           A <i className="text-red-300  ">vs</i> B{" "}
-          {/* <span className="text-red-500 dark:text-purple tracking-wide">
-            Wins
-          </span> */}
         </span>
         <hr className="flex-grow border-t-2 dark:border-semiblack ml-4 border-gray-500 " />
       </div>
       <div className="dark:bg-semiblack  pt-5 pb-5 rounded-xl">
         <PieChart
-          className=""
+          margin={{ top: 40, left: 90 }}
           colors={["#D4ADFC", "#FDAF7B"]} // Use palette
           series={[
             {
@@ -44,7 +40,9 @@ function ContestWinCom({ user1, user2 }: userNameComponentType) {
                 { id: 1, value: user2WinData, label: user2 },
                 { id: 0, value: user1WinData, label: user1 },
               ],
-              arcLabel: (params) => params.value + " wins",
+              arcLabel: (params) => {
+                return params.value == 0 ? "" : params.value + " wins";
+              },
               highlightScope: { fade: "global", highlight: "item" },
               faded: { innerRadius: 30, additionalRadius: -30, color: "gray" },
             },
@@ -67,6 +65,9 @@ function ContestWinCom({ user1, user2 }: userNameComponentType) {
               },
             },
             legend: {
+              direction: "row",
+              position: { vertical: "top", horizontal: "middle" },
+              padding: 0,
               labelStyle: {
                 fontSize: "14px",
                 fill: textColor,
@@ -81,7 +82,7 @@ function ContestWinCom({ user1, user2 }: userNameComponentType) {
             },
           }}
           width={400}
-          height={200}
+          height={280}
         />
       </div>
     </div>

@@ -1,11 +1,6 @@
 import React, { useState } from "react";
 
-import {
-  ContestTimeLinePropsType,
-  contestType,
-  userNameComponentType,
-} from "@/types/types";
-// import { LineChart } from "@mui/x-charts";
+import { contestType, userNameComponentType } from "@/types/types";
 import { LineChart } from "@mui/x-charts/LineChart";
 import { useRecoilValue } from "recoil";
 import textColorAtom from "@/atoms/textColorAtom";
@@ -49,7 +44,6 @@ export default function ContestTimeLine({
   user1,
   user2,
 }: userNameComponentType) {
-  //   console.log("e1e");
   const [xAxisData, setXAxisData] = useState<string[]>([]);
   const [user1Rating, setUser1Rating] = useState<(number | null)[]>([]);
   const [user2Rating, setUser2Rating] = useState<(number | null)[]>([]);
@@ -57,7 +51,6 @@ export default function ContestTimeLine({
   const textColor = useRecoilValue(textColorAtom);
   const getRatingData = async () => {
     const tempContestRatingData = await AllContestUsers(user1, user2);
-    console.log("tempContestRatingData", tempContestRatingData);
 
     const allContestsUser1 =
       tempContestRatingData.allContestsUser1 as contestType[];
@@ -69,7 +62,6 @@ export default function ContestTimeLine({
       allContestsUser2
     );
     setXAxisData(xAxisDataCompute);
-    // console.log(xAxisData.length);
     const sortedContestsUser1 = allContestsUser1.sort(
       (a, b) => a.timestamp - b.timestamp
     );
@@ -122,7 +114,6 @@ export default function ContestTimeLine({
           Timeline
         </span>
         <hr className="flex-grow border-t-2 dark:border-semiblack ml-4 border-gray-500 " />
-        {/* < hr className="flex-grow border-t-2 border-semiblack ml-4" /> */}
       </div>
       <LineChart
         className="dark:bg-semiblack rounded-xl"
