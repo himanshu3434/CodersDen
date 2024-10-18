@@ -12,5 +12,5 @@ export const CommonContest = async (
   const user2Data = contestData.user2Data;
 
   let commonContest = getCommonContest(user1, user2, user1Data, user2Data);
-  return commonContest;
+  return commonContest.sort((a, b) => b.timestamp - a.timestamp);
 };
