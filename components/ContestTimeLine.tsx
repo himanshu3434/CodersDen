@@ -5,6 +5,7 @@ import { LineChart } from "@mui/x-charts/LineChart";
 import { useRecoilValue } from "recoil";
 import textColorAtom from "@/atoms/textColorAtom";
 import { AllContestUsers } from "@/actions/charts/allContestUsers";
+import ChartType2 from "./skeleton/ChartType2";
 
 // Function to merge timestamps and format them
 function mergeTimestamps(
@@ -44,6 +45,7 @@ export default function ContestTimeLine({
   user1,
   user2,
 }: userNameComponentType) {
+  const [loading, setLoading] = useState(true);
   const [xAxisData, setXAxisData] = useState<string[]>([]);
   const [user1Rating, setUser1Rating] = useState<(number | null)[]>([]);
   const [user2Rating, setUser2Rating] = useState<(number | null)[]>([]);
@@ -101,6 +103,7 @@ export default function ContestTimeLine({
 
     setUser1Rating(user1RatingData);
     setUser2Rating(user2RatingData);
+    setLoading(false);
   };
 
   React.useEffect(() => {
@@ -115,75 +118,80 @@ export default function ContestTimeLine({
         </span>
         <hr className="flex-grow border-t-2 dark:border-semiblack ml-4 border-gray-500 " />
       </div>
-      <LineChart
-        className="dark:bg-semiblack rounded-xl"
-        xAxis={[
-          {
-            data: xAxisData,
-            scaleType: "point",
-            dataKey: "month",
-            valueFormatter: (dateString) => {
-              // Split the date string into parts
-              const [monthDay, year] = dateString.split(", ");
-              return `${monthDay}\n${year}`; // Return two lines
-            },
-            tickLabelInterval(value, index) {
-              // Display every 2nd label
-              return index % 5 === 0;
-            },
-          },
-        ]}
-        yAxis={[
-          {
-            min: 1200, // Set the starting point of the y-axis
-            //   max: 4000, // Optionally set the maximum value
 
-            scaleType: "linear",
-          },
-        ]}
-        series={[
-          {
-            label: user1,
-            data: user1Rating,
-            connectNulls: true,
-            showMark: false,
-            color: "#FDAF7B",
-          },
-          {
-            label: user2,
-            data: user2Rating,
-            connectNulls: true,
-            showMark: false,
-            color: "#D4ADFC",
-          },
-        ]}
-        width={1000}
-        height={300}
-        slotProps={{
-          axisLine: {
-            style: {
-              stroke: textColor,
+      {loading == true ? (
+        <ChartType2 />
+      ) : (
+        <LineChart
+          className="dark:bg-semiblack rounded-xl"
+          xAxis={[
+            {
+              data: xAxisData,
+              scaleType: "point",
+              dataKey: "month",
+              valueFormatter: (dateString) => {
+                // Split the date string into parts
+                const [monthDay, year] = dateString.split(", ");
+                return `${monthDay}\n${year}`; // Return two lines
+              },
+              tickLabelInterval(value, index) {
+                // Display every 2nd label
+                return index % 5 === 0;
+              },
             },
-          },
-          axisTick: {
-            style: {
-              stroke: textColor,
+          ]}
+          yAxis={[
+            {
+              min: 1200, // Set the starting point of the y-axis
+              //   max: 4000, // Optionally set the maximum value
+
+              scaleType: "linear",
             },
-          },
-          axisTickLabel: {
-            style: {
-              fill: textColor,
-              fontSize: "14px",
+          ]}
+          series={[
+            {
+              label: user1,
+              data: user1Rating,
+              connectNulls: true,
+              showMark: false,
+              color: "#FDAF7B",
             },
-          },
-          legend: {
-            labelStyle: {
-              fontSize: "14px",
-              fill: textColor,
+            {
+              label: user2,
+              data: user2Rating,
+              connectNulls: true,
+              showMark: false,
+              color: "#D4ADFC",
             },
-          },
-        }}
-      />
+          ]}
+          width={1000}
+          height={300}
+          slotProps={{
+            axisLine: {
+              style: {
+                stroke: textColor,
+              },
+            },
+            axisTick: {
+              style: {
+                stroke: textColor,
+              },
+            },
+            axisTickLabel: {
+              style: {
+                fill: textColor,
+                fontSize: "14px",
+              },
+            },
+            legend: {
+              labelStyle: {
+                fontSize: "14px",
+                fill: textColor,
+              },
+            },
+          }}
+        />
+      )}
     </div>
   );
 }

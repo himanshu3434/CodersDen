@@ -2,17 +2,20 @@ import { CommonContest } from "@/actions/charts/commonContest";
 import { ratingChangeType, userNameComponentType } from "@/types/types";
 import { formatTime } from "@/utils/formatTime";
 import React, { useEffect, useState } from "react";
+import TableSkeleton from "./skeleton/TableSkeleton";
 interface RatingChangeDisplayType extends ratingChangeType {
   timestampString: string;
 }
 function RatingTable({ user1, user2 }: userNameComponentType) {
   const [option, setOption] = React.useState(0);
+  const [loading, setloading] = useState(true);
   const [updatedCommonContests, setUpdatedCommonContests] = useState<
     RatingChangeDisplayType[]
   >([]);
 
   const getCommonContest = async () => {
     const tableData = (await CommonContest(user1, user2)) as ratingChangeType[];
+
     const updatedCommonContestsData = tableData.map((contest) => {
       const date = new Date(contest.timestamp * 1000); // Convert Unix timestamp to milliseconds
       const options: Intl.DateTimeFormatOptions = {
@@ -28,6 +31,7 @@ function RatingTable({ user1, user2 }: userNameComponentType) {
     });
 
     setUpdatedCommonContests(updatedCommonContestsData);
+    setloading(false);
   };
   useEffect(() => {
     getCommonContest();
@@ -165,7 +169,13 @@ function RatingTable({ user1, user2 }: userNameComponentType) {
           <hr className="flex-grow border-t-2 dark:border-semiblack ml-4 border-gray-500   " />
         </div>
 
-        <div className="my-3">{option === 1 ? detailsTable : ratingTable}</div>
+        {loading == true ? (
+          <TableSkeleton user1={user1} user2={user2} />
+        ) : (
+          <div className="my-3">
+            {option === 1 ? detailsTable : ratingTable}
+          </div>
+        )}
       </div>
     </div>
   );

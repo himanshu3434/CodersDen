@@ -8,6 +8,7 @@ import {
 import { BarChart } from "@mui/x-charts/BarChart";
 import { useEffect, useState } from "react";
 import { useRecoilValue } from "recoil";
+import ChartType1 from "./skeleton/ChartType1";
 
 const SessionBeatsTable = ({ user1, user2 }: userNameComponentType) => {
   const [allSessionBeats, setAllSessionBeats] = useState<allUserSessionType>({
@@ -18,7 +19,7 @@ const SessionBeatsTable = ({ user1, user2 }: userNameComponentType) => {
     user2SessionBeatsMedium: 0,
     user2SessionBeatsHard: 0,
   });
-
+  const [loading, setLoading] = useState(true);
   const textColor = useRecoilValue(textColorAtom);
 
   const getSessionBeatData = async () => {
@@ -28,6 +29,7 @@ const SessionBeatsTable = ({ user1, user2 }: userNameComponentType) => {
     )) as userSessionBeatsObjType;
 
     setAllSessionBeats(sessionData.allSessionBeats);
+    setLoading(false);
   };
   useEffect(() => {
     getSessionBeatData();
@@ -41,63 +43,67 @@ const SessionBeatsTable = ({ user1, user2 }: userNameComponentType) => {
         </span>
         <hr className="flex-grow border-t-2 dark:border-semiblack ml-4 border-gray-500 " />
       </div>
-      <BarChart
-        className="dark:bg-semiblack rounded-xl "
-        yAxis={[{ label: "Code Beats(%)" }]}
-        xAxis={[{ scaleType: "band", data: ["Easy ", "Medium ", "Hard "] }]}
-        series={[
-          {
-            label: user1,
-            data: [
-              allSessionBeats.user1SessionBeatsEasy,
-              allSessionBeats.user1SessionBeatsMedium,
-              allSessionBeats.user1SessionBeatsHard,
-            ],
-            color: "#FDAF7B",
-          },
-          {
-            label: user2,
-            data: [
-              allSessionBeats.user2SessionBeatsEasy,
-              allSessionBeats.user2SessionBeatsMedium,
-              allSessionBeats.user2SessionBeatsHard,
-            ],
-            color: "#D4ADFC",
-          },
-        ]}
-        width={400}
-        height={300}
-        borderRadius={18}
-        slotProps={{
-          legend: {
-            labelStyle: {
-              fontSize: "14px",
-              fill: textColor,
+      {loading == true ? (
+        <ChartType1 width={400} height={300} />
+      ) : (
+        <BarChart
+          className="dark:bg-semiblack rounded-xl "
+          yAxis={[{ label: "Code Beats(%)" }]}
+          xAxis={[{ scaleType: "band", data: ["Easy ", "Medium ", "Hard "] }]}
+          series={[
+            {
+              label: user1,
+              data: [
+                allSessionBeats.user1SessionBeatsEasy,
+                allSessionBeats.user1SessionBeatsMedium,
+                allSessionBeats.user1SessionBeatsHard,
+              ],
+              color: "#FDAF7B",
             },
-          },
-          axisLine: {
-            style: {
-              stroke: textColor,
+            {
+              label: user2,
+              data: [
+                allSessionBeats.user2SessionBeatsEasy,
+                allSessionBeats.user2SessionBeatsMedium,
+                allSessionBeats.user2SessionBeatsHard,
+              ],
+              color: "#D4ADFC",
             },
-          },
-          axisTick: {
-            style: {
-              stroke: textColor,
+          ]}
+          width={400}
+          height={300}
+          borderRadius={18}
+          slotProps={{
+            legend: {
+              labelStyle: {
+                fontSize: "14px",
+                fill: textColor,
+              },
             },
-          },
-          axisTickLabel: {
-            style: {
-              fill: textColor,
-              fontSize: "14px",
+            axisLine: {
+              style: {
+                stroke: textColor,
+              },
             },
-          },
-          axisLabel: {
-            style: {
-              fill: textColor,
+            axisTick: {
+              style: {
+                stroke: textColor,
+              },
             },
-          },
-        }}
-      />
+            axisTickLabel: {
+              style: {
+                fill: textColor,
+                fontSize: "14px",
+              },
+            },
+            axisLabel: {
+              style: {
+                fill: textColor,
+              },
+            },
+          }}
+        />
+      )}
     </div>
   );
 };

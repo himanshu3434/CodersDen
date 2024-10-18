@@ -8,6 +8,7 @@ import {
 import { useRecoilValue } from "recoil";
 import textColorAtom from "@/atoms/textColorAtom";
 import { TypesQuestionSolved } from "@/actions/charts/typesofquestion";
+import ChartType1 from "./skeleton/ChartType1";
 type dataSetType = {
   tagName: string;
   user1: number;
@@ -56,6 +57,7 @@ export default function TypesofQuestions({
   user1,
   user2,
 }: userNameComponentType) {
+  const [loading, setLoading] = React.useState(true);
   const [dataSet, setDataSet] = React.useState<dataSetType[]>([]);
   const textColor = useRecoilValue(textColorAtom);
 
@@ -70,6 +72,7 @@ export default function TypesofQuestions({
       typesQuestionSolvedObj.tagProblemUser2
     );
     setDataSet(dataSetArray);
+    setLoading(false);
   };
   React.useEffect(() => {
     getTypesQuestionSolvedData();
@@ -85,63 +88,67 @@ export default function TypesofQuestions({
 
       <div className=" relative overflow-scroll overflow-y-auto w-[64rem] h-auto scrollbar">
         <div className="">
-          <BarChart
-            className="dark:bg-semiblack rounded-xl  mb-1"
-            dataset={dataSet}
-            xAxis={[
-              {
-                scaleType: "band",
-                dataKey: "tagName",
-                valueFormatter: (value: string) => {
-                  return value.split(/[\s-]+/).join("\n");
+          {loading == true ? (
+            <ChartType1 width={3320} height={600} />
+          ) : (
+            <BarChart
+              className="dark:bg-semiblack rounded-xl  mb-1"
+              dataset={dataSet}
+              xAxis={[
+                {
+                  scaleType: "band",
+                  dataKey: "tagName",
+                  valueFormatter: (value: string) => {
+                    return value.split(/[\s-]+/).join("\n");
+                  },
                 },
-              },
-            ]}
-            series={[
-              {
-                dataKey: "user1",
-                label: user1,
-                valueFormatter,
-                color: "#FDAF7B",
-                // FDAF7B   FFB38E
-              },
-              {
-                dataKey: "user2",
-                label: user2,
-                valueFormatter,
-                color: "#D4ADFC",
-                // DFCCFB  D0BFFF D4ADFC   BEADFA
-              },
-            ]}
-            borderRadius={15}
-            {...chartSetting}
-            grid={{ vertical: true }}
-            highlightedItem={null}
-            slotProps={{
-              legend: {
-                labelStyle: {
-                  fontSize: "14px",
-                  fill: textColor,
+              ]}
+              series={[
+                {
+                  dataKey: "user1",
+                  label: user1,
+                  valueFormatter,
+                  color: "#FDAF7B",
+                  // FDAF7B   FFB38E
                 },
-              },
-              axisLine: {
-                style: {
-                  stroke: textColor,
+                {
+                  dataKey: "user2",
+                  label: user2,
+                  valueFormatter,
+                  color: "#D4ADFC",
+                  // DFCCFB  D0BFFF D4ADFC   BEADFA
                 },
-              },
-              axisTick: {
-                style: {
-                  stroke: textColor,
+              ]}
+              borderRadius={15}
+              {...chartSetting}
+              grid={{ vertical: true }}
+              highlightedItem={null}
+              slotProps={{
+                legend: {
+                  labelStyle: {
+                    fontSize: "14px",
+                    fill: textColor,
+                  },
                 },
-              },
-              axisTickLabel: {
-                style: {
-                  fill: textColor,
-                  fontSize: "11px",
+                axisLine: {
+                  style: {
+                    stroke: textColor,
+                  },
                 },
-              },
-            }}
-          />
+                axisTick: {
+                  style: {
+                    stroke: textColor,
+                  },
+                },
+                axisTickLabel: {
+                  style: {
+                    fill: textColor,
+                    fontSize: "11px",
+                  },
+                },
+              }}
+            />
+          )}
         </div>
       </div>
     </div>

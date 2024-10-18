@@ -2,6 +2,7 @@ import textColorAtom from "@/atoms/textColorAtom";
 import { MaxSubmissionDataObjType } from "@/types/types";
 import { BarChart } from "@mui/x-charts";
 import { useRecoilValue } from "recoil";
+import ChartType1 from "./skeleton/ChartType1";
 
 function MaxSubmissionTable({
   maxSubmissionDataObj,
@@ -15,13 +16,14 @@ function MaxSubmissionTable({
   const textColor = useRecoilValue(textColorAtom);
   return (
     <div>
-      <div className="flex items-center my-2">
+      <div className="flex items-center my-2 ">
         <hr className="flex-grow border-t-2 dark:border-semiblack mr-4  border-gray-500   " />
         <span className="text-lg font-semibold dark:text-slate-500  text-blackLighter">
           Max Submission
         </span>
         <hr className="flex-grow border-t-2 dark:border-semiblack ml-4 border-gray-500" />
       </div>
+
       <BarChart
         className="dark:bg-semiblack rounded-xl  mt-6"
         xAxis={[{ scaleType: "band", data: ["Day", "Week ", "Month "] }]}
