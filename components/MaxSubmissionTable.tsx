@@ -2,7 +2,6 @@ import textColorAtom from "@/atoms/textColorAtom";
 import { MaxSubmissionDataObjType } from "@/types/types";
 import { BarChart } from "@mui/x-charts";
 import { useRecoilValue } from "recoil";
-import ChartType1 from "./skeleton/ChartType1";
 
 function MaxSubmissionTable({
   maxSubmissionDataObj,

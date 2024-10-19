@@ -165,7 +165,7 @@ export default function ContestTimeLine({
             },
           ]}
           width={1000}
-          height={300}
+          height={400}
           slotProps={{
             axisLine: {
               style: {
