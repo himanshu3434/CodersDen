@@ -148,35 +148,35 @@ function GetStats() {
               <hr className="w-[70vw] mx-auto h-1 bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 mt-5 border-0" />
             </h1>
             <div>{contestTimeLine}</div>
-            <div className="text-5xl text-center dark:text-white font-bold mt-10 font-mono  rounded-3xl text-blackLight">
-              <span className="text-red-500  dark:text-red-400 tracking-wider ">
-                {" "}
-                Fact :
-              </span>{" "}
-              <span className="text-[#46e19e] mr-2 inline-block italic ">
-                {" "}
-                {maxRatingUser}{" "}
-              </span>{" "}
-              has maximum rating up of{" "}
-              <span className="text-[#46e19e] italic">{maxRatingUp}</span>
-              <span className="inline-block ml-2 mr-2 animate-bounce italic  ">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                  className="w-7 h-7 text-[#46e19e]  "
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={5}
-                    d="M5 10l7-7m0 0l7 7m-7-7v18"
-                  />
-                </svg>
-              </span>
-              points.
-            </div>
+            {maxRatingUp > 0 && (
+              <div className="text-5xl text-center dark:text-white font-bold mt-10 font-mono rounded-3xl text-blackLight">
+                <span className="text-red-500 dark:text-red-400 tracking-wider">
+                  Fact:
+                </span>{" "}
+                <span className="text-[#46e19e] mr-2 inline-block italic">
+                  {maxRatingUser}
+                </span>{" "}
+                has maximum rating up of{" "}
+                <span className="text-[#46e19e] italic">{maxRatingUp}</span>
+                <span className="inline-block ml-2 mr-2 animate-bounce italic">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                    className="w-7 h-7 text-[#46e19e]"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={5}
+                      d="M5 10l7-7m0 0l7 7m-7-7v18"
+                    />
+                  </svg>
+                </span>
+                points.
+              </div>
+            )}
             <div className="flex mt-5 justify-between ">
               <div>{contestWinComparison}</div>
               <div>{totalContestPie}</div>

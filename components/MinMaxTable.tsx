@@ -38,6 +38,17 @@ export default function MinMaxTable({ user1, user2 }: userNameComponentType) {
       </div>
       {loading == true ? (
         <ChartType1 width={400} height={300} />
+      ) : !allRatings.currentRatingUser1 &&
+        !allRatings.currentRatingUser2 &&
+        !allRatings.maxRatingUser1 &&
+        !allRatings.maxRatingUser2 &&
+        !allRatings.minRatingUser1 &&
+        !allRatings.minRatingUser2 ? (
+        <div className="dark:bg-semiblack pt-5 pb-5 rounded-xl flex justify-center items-center h-72 w-96">
+          <p className="text-center text-gray-500 dark:text-gray-300 font-semibold">
+            Not enough data to Compare
+          </p>
+        </div>
       ) : (
         <BarChart
           className="dark:bg-semiblack rounded-xl  "

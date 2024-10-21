@@ -31,7 +31,7 @@ function TotalContestPie({ user1, user2 }: userNameComponentType) {
       </div>
       {loading == true ? (
         <PieChartType />
-      ) : (
+      ) : totalContestUser1Data || totalContestUser2Data ? (
         <div className="dark:bg-semiblack  pt-5 pb-5 rounded-xl">
           <PieChart
             colors={["#D4ADFC", "#FDAF7B"]} // Use palette
@@ -98,6 +98,12 @@ function TotalContestPie({ user1, user2 }: userNameComponentType) {
               },
             }}
           />
+        </div>
+      ) : (
+        <div className="dark:bg-semiblack pt-5 pb-5 rounded-xl flex justify-center items-center h-72 w-96">
+          <p className="text-center text-gray-500 dark:text-gray-300 font-semibold">
+            Not enough data to Compare
+          </p>
         </div>
       )}
     </div>

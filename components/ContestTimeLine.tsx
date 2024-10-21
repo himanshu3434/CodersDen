@@ -121,7 +121,7 @@ export default function ContestTimeLine({
 
       {loading == true ? (
         <ChartType2 />
-      ) : (
+      ) : user1Rating.length > 0 || user2Rating.length > 0 ? (
         <LineChart
           className="dark:bg-semiblack rounded-xl"
           xAxis={[
@@ -191,6 +191,12 @@ export default function ContestTimeLine({
             },
           }}
         />
+      ) : (
+        <div className="dark:bg-semiblack pt-5 pb-5 rounded-xl flex justify-center items-center h-72 w-96">
+          <p className="text-center text-gray-500 dark:text-gray-300 font-semibold">
+            Not enough data to compare
+          </p>
+        </div>
       )}
     </div>
   );

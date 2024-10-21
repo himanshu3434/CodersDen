@@ -34,7 +34,14 @@ export const MaxRatingUp = async (
     user1MaxRatingUp = Math.round(user1MaxRatingUp);
     user2MaxRatingUp = Math.round(user2MaxRatingUp);
 
-    if (user1MaxRatingUp > user2MaxRatingUp)
+    if (user1MaxRatingUp === -9999) {
+      user1MaxRatingUp = 0;
+    }
+    if (user2MaxRatingUp === -9999) {
+      user2MaxRatingUp = 0;
+    }
+
+    if (user1MaxRatingUp >= user2MaxRatingUp)
       return { userMaxRatingUp: user1MaxRatingUp, user: user1 };
 
     return { userMaxRatingUp: user2MaxRatingUp, user: user2 };

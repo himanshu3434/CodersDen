@@ -36,7 +36,7 @@ function ContestWinCom({ user1, user2 }: userNameComponentType) {
 
       {loading == true ? (
         <PieChartType />
-      ) : (
+      ) : user1WinData && user2WinData ? (
         <div className="dark:bg-semiblack  pt-5 pb-5 rounded-xl">
           <PieChart
             margin={{ top: 40, left: 90 }}
@@ -95,6 +95,12 @@ function ContestWinCom({ user1, user2 }: userNameComponentType) {
             width={400}
             height={280}
           />
+        </div>
+      ) : (
+        <div className="dark:bg-semiblack pt-5 pb-5 rounded-xl flex justify-center items-center h-72 w-96">
+          <p className="text-center text-gray-500 dark:text-gray-300 font-semibold">
+            Not enough data to compare
+          </p>
         </div>
       )}
     </div>

@@ -37,7 +37,7 @@ function RatingTable({ user1, user2 }: userNameComponentType) {
     getCommonContest();
   }, []);
   const ratingTable = (
-    <div className="">
+    <div className="overflow-x-auto rounded-2xl">
       <table className="min-w-[70vw]  dark:bg-semiblack   ">
         <thead className="text-xl bg-[#262626] dark:bg-blue-600 text-white  dark:text-gray-200 h-[7vh] ">
           <th className="dark:text-white">Date</th>
@@ -47,27 +47,39 @@ function RatingTable({ user1, user2 }: userNameComponentType) {
           <th className="text-green-300">Distance</th>
         </thead>
         <tbody className=" text-center text-lg bg-white dark:bg-semiblack ">
-          {updatedCommonContests.map((contest, index) => (
-            <tr key={index} className=" hover:bg-gray-300 dark:hover:bg-black ">
-              <td className="py-2 text-black dark:text-gray-300">
-                {contest.timestampString}
-              </td>
-              <td className="py-2 text-black dark:text-gray-300">
-                {contest.title}
-              </td>
-              <td className="text-colorChartV1">{contest.ranking1}</td>
-              <td className="text-colorChartV2 ">{contest.ranking2}</td>
-              <td
-                className={
-                  contest.userWon === true
-                    ? "text-colorChartV1"
-                    : "text-colorChartV2"
-                }
-              >
-                {contest.distance}
+          {updatedCommonContests.length === 0 ? (
+            <tr>
+              <td colSpan={4} className="py-2 text-black dark:text-gray-300">
+                No common contests found
               </td>
             </tr>
-          ))}
+          ) : (
+            updatedCommonContests.map((contest, index) => (
+              <tr
+                key={index}
+                className=" hover:bg-gray-300 dark:hover:bg-black "
+              >
+                <td className="py-2 text-black dark:text-gray-300">
+                  {contest.timestampString}
+                </td>
+                <td className="py-2 text-black dark:text-gray-300">
+                  {contest.title}
+                </td>
+                <td className="text-colorChartV1">{contest.ranking1}</td>
+                <td className="text-colorChartV2 ">{contest.ranking2}</td>
+                <td
+                  className={
+                    contest.userWon === true
+                      ? "text-colorChartV1"
+                      : "text-colorChartV2"
+                  }
+                >
+                  {contest.distance}
+                </td>
+              </tr>
+            ))
+          )}
+          {}
         </tbody>
       </table>
     </div>
@@ -99,34 +111,45 @@ function RatingTable({ user1, user2 }: userNameComponentType) {
           </tr>
         </thead>
         <tbody className="text-center text-lg bg-white dark:bg-semiblack ">
-          {updatedCommonContests.map((contest, index) => {
-            const time1 = formatTime(contest.finishTimeInSeconds1);
-            const time2 = formatTime(contest.finishTimeInSeconds2);
+          {updatedCommonContests.length === 0 ? (
+            <tr>
+              <td colSpan={4} className="py-2 text-black dark:text-gray-300">
+                No common contests found
+              </td>
+            </tr>
+          ) : (
+            updatedCommonContests.map((contest, index) => {
+              const time1 = formatTime(contest.finishTimeInSeconds1);
+              const time2 = formatTime(contest.finishTimeInSeconds2);
 
-            return (
-              <tr key={index} className="hover:bg-gray-300 dark:hover:bg-black">
-                <td className="py-2 text-black dark:text-gray-300">
-                  {contest.timestampString}
-                </td>
-                <td className="py-2 text-black dark:text-gray-300 ">
-                  {contest.title}
-                </td>
-                <td className="text-colorChartV1  ">
-                  <div className=" flex justify-between ">
-                    <td className="w-1/2 ">{contest.problemsSolved1}</td>
-                    <td className=" w-1/2 "> {time1}</td>
-                  </div>
-                </td>
+              return (
+                <tr
+                  key={index}
+                  className="hover:bg-gray-300 dark:hover:bg-black"
+                >
+                  <td className="py-2 text-black dark:text-gray-300">
+                    {contest.timestampString}
+                  </td>
+                  <td className="py-2 text-black dark:text-gray-300 ">
+                    {contest.title}
+                  </td>
+                  <td className="text-colorChartV1  ">
+                    <div className=" flex justify-between ">
+                      <td className="w-1/2 ">{contest.problemsSolved1}</td>
+                      <td className=" w-1/2 "> {time1}</td>
+                    </div>
+                  </td>
 
-                <td className="text-colorChartV2  ">
-                  <div className=" flex justify-between ">
-                    <td className="w-1/2 ">{contest.problemsSolved2}</td>
-                    <td className=" w-1/2  "> {time2}</td>
-                  </div>
-                </td>
-              </tr>
-            );
-          })}
+                  <td className="text-colorChartV2  ">
+                    <div className=" flex justify-between ">
+                      <td className="w-1/2 ">{contest.problemsSolved2}</td>
+                      <td className=" w-1/2  "> {time2}</td>
+                    </div>
+                  </td>
+                </tr>
+              );
+            })
+          )}
         </tbody>
       </table>
     </div>
